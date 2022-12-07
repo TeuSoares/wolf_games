@@ -24,13 +24,3 @@ vendor
 *.njsproj
 *.sln
 *.sw?
-
-
-Footer
-Header
-pages
-styles
-Controllers
-Helpers
-Middlewares
-Models
