@@ -26,8 +26,10 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     main{
-        height: 70vh;
+        /* height: 70vh; */
         background-color: #161618;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 
     a{
@@ -38,21 +40,6 @@ export const GlobalStyles = createGlobalStyle`
 
     a:hover{
         color: #9466ff;
-    }
-
-    button{
-        border-style: none;
-        padding: 10px 18px;
-        border-radius: 5px;
-        font-size: 1em;
-        cursor: pointer;
-        background-color: #9466ff;
-        transition: all 0.5s ease;
-        color: #fff;
-    }
-
-    button:hover{
-        background-color: #8257e5;
     }
 
     p{

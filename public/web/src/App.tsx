@@ -6,6 +6,9 @@ import Header from "./components/Header";
 
 // Pages
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ValidateEmail from "./pages/ValidateEmail";
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
       <Header />
       <main >
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/verifyEmail" element={<ValidateEmail />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </main>

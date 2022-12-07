@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
 
 // Styles
-import { Container } from "../../styles/styles";
+import { Button, Container } from "../../styles/styles";
 import { 
     Authorial,
     Contents,
@@ -127,7 +127,7 @@ const Footer = () => {
             <Authorial>
                 <Container displayFlex alignItems="center">
                     <span>Copyright © 2022</span>
-                    <button type="button" onClick={handleScrollToTop}><FaAngleUp /></button>
+                    <Button type="button" onClick={handleScrollToTop}><FaAngleUp /></Button>
                 </Container>
             </Authorial>
         </footer>

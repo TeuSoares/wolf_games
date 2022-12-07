@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 
 // Styles
-import { Container } from "../../../styles/styles";
+import { Button, Container } from "../../../styles/styles";
 import {
     ContainerNavbar,
     Items, 
@@ -26,13 +26,13 @@ const Navbar = () => {
                     </Link>
                     <form>
                         <input type="text" placeholder="Faça sua pesquisa aqui..." />
-                        <button type="submit">
+                        <Button type="submit">
                             <FaSearch />
-                        </button>
+                        </Button>
                     </form>
                     <LinksHeader>
                         <div>
-                            <Link to="#">
+                            <Link to="/login">
                                 <FaUserCircle /> Entrar
                             </Link>
                         </div>

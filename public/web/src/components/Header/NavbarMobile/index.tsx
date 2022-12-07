@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 // Styles
-import { Container } from "../../../styles/styles";
+import { Button, Container } from "../../../styles/styles";
 import { 
     ContainerMobile,
     Items, 
@@ -61,26 +61,26 @@ const NavbarMobile = () => {
             <Items>
                 <Container displayFlex flexDirection="column" justifyContent="center" alignItems="center">
                     <ButtonNavMobile>
-                            <button 
+                            <Button 
                                 type="button" 
                                 onClick={handleNavActive}
                             >
                                 {!navActive ? (<FaBars />) : (<FaTimes />)}
-                            </button>
+                            </Button>
                         <Link to="#">
                             <img src="../../../public/logo.png" alt="Logo Wolf Games" />
                         </Link>
-                        <button type="button">
+                        <Button type="button">
                             <Link to="#">
                                 <FaShoppingCart />
                             </Link>
-                        </button>
+                        </Button>
                     </ButtonNavMobile>
                     <form>
                         <input type="text" placeholder="Faça sua pesquisa aqui..." />
-                        <button type="submit">
+                        <Button type="submit">
                             <FaSearch />
-                        </button>
+                        </Button>
                     </form>
                 </Container>
             </Items>
@@ -89,7 +89,7 @@ const NavbarMobile = () => {
                 <ul>
                     <Container>
                         <li>
-                            <Link to="#">
+                            <Link to="/login">
                                 Entrar
                             </Link>
                         </li>

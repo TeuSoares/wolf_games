@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ContainerMobile = styled.div`
     display: none;
     position: relative;
+    z-index: 99;
 
     @media (max-width: 818px) { 
         display: block;
