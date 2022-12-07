@@ -1,0 +1,27 @@
+{
+    "name": "mateu/server",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "scripts": {
+        "server": "php -S localhost:8080 -t ../public/server"
+    },
+    "authors": [
+        {
+            "name": "Mateus Soares",
+            "email": "mateussoares114@gmail.com"
+        }
+    ],
+    "config": {
+        "process-timeout": 0
+    },
+    "require": {
+        "slim/slim": "3.*",
+        "firebase/php-jwt": "^5.0",
+        "vlucas/phpdotenv": "^5.5",
+        "phpmailer/phpmailer": "^6.6",
+        "tuupola/slim-jwt-auth": "^3.6"
+    }
+}

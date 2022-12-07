@@ -1,0 +1,30 @@
+<?php
+    namespace App\Config;
+
+    $dotenv = \Dotenv\Dotenv::createImmutable("F:\Programação\Desenvolvimento\projetos\wolfGames\cliente\server");
+    $dotenv->load();
+
+    class Connection {
+        private static $host;
+        private static $dbname;
+        private static $username;
+        private static $password;
+
+        public static function getConnection(){
+            self::$host = $_ENV["DB_HOST"];
+            self::$dbname = $_ENV["DB_NAME"];
+            self::$username = $_ENV["DB_USERNAME"];
+            self::$password = $_ENV["DB_PASSWORD"];
+
+            try{
+
+                $conn = new \PDO('mysql:host='.self::$host.';dbname='.self::$dbname,self::$username,self::$password);
+                $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                
+                return $conn;
+            }catch(\PDOException $e){
+                die('ERROR: ' . $e->getMessage());
+            }
+        }
+    }
+?>
