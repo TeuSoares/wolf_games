@@ -3,7 +3,7 @@
     $dotenv->load();
 
     $app->add(new Tuupola\Middleware\JwtAuthentication([
-        "path" => ["/api/users/", "/api/product/", "/api/purchase/"],
+        "path" => ["/api/users/", "/api/purchase/"],
         "ignore" => ["/api/users/register", "/api/users/login", "/api/users/verificationEmail"],
         "secret" => $_ENV['SECRET_KEY']
     ]));
