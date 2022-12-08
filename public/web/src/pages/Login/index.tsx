@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState, FormEvent, ChangeEvent } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, FormEvent, ChangeEvent, useContext } from "react";
+import { Link, useLocation, useNavigate, } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import { Container, AnimationInputText, Button, Message } from "../../styles/styles";
 import { Items } from "./styles";
 
@@ -27,6 +28,8 @@ const Login = () => {
     const location = useLocation();
     const [stateLocation, setStateLocation] = useState<LocationStateInterface | null>();
 
+    const { handleChangeAuthentication } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -36,6 +39,8 @@ const Login = () => {
 
         try {
             await axios.post('http://localhost:8080/api/users/login', dataForm);
+
+            handleChangeAuthentication(true);
             
             navigate("/");
         } catch (error: any) {

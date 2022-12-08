@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { useEffect, useContext } from "react";
+
 // Icons
 import { 
     FaShoppingCart, 
@@ -15,13 +17,16 @@ import {
     Nav,
     LinksHeader,
 } from "./styles";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const Navbar = () => {
+    const { isAuthenticated } = useContext(AuthContext);
+
     return ( 
         <ContainerNavbar>
             <Items>
                 <Container displayFlex alignItems="center">
-                    <Link to="#">
+                    <Link to="/">
                         <img src="../../../public/logo.png" alt="Logo Wolf Games" />
                     </Link>
                     <form>
@@ -32,9 +37,15 @@ const Navbar = () => {
                     </form>
                     <LinksHeader>
                         <div>
-                            <Link to="/login">
-                                <FaUserCircle /> Entrar
-                            </Link>
+                            {!isAuthenticated ? (
+                                <Link to="/login">
+                                    <FaUserCircle /> Entrar
+                                </Link>
+                            ) : (
+                                <Link to="/profile">
+                                    <FaUserCircle /> Perfil
+                                </Link>
+                            )}
                         </div>
                         <div>
                             <Link to="#">

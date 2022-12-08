@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 // Hooks
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 
 // Icons
 import { 
@@ -19,9 +19,12 @@ import {
     Nav,
     ButtonNavMobile,
 } from "./styles";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const NavbarMobile = () => {
     const [navActive, setNavActive] = useState<true | false>(false);
+
+    const { isAuthenticated } = useContext(AuthContext);
 
     const navActiveRef = useRef<HTMLElement | null>(null);
 
@@ -89,9 +92,15 @@ const NavbarMobile = () => {
                 <ul>
                     <Container>
                         <li>
-                            <Link to="/login">
-                                Entrar
-                            </Link>
+                            {!isAuthenticated ? (
+                                <Link to="/login">
+                                    Entrar
+                                </Link>
+                            ) : (
+                                <Link to="/profile">
+                                    Perfil
+                                </Link>
+                            )}
                         </li>
                         <li>
                             <Link to="#">
