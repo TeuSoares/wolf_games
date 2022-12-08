@@ -5,7 +5,12 @@
     $app->add(new Tuupola\Middleware\JwtAuthentication([
         "path" => ["/api/users/", "/api/purchase/"],
         "ignore" => ["/api/users/register", "/api/users/login", "/api/users/verificationEmail"],
-        "secret" => $_ENV['SECRET_KEY']
+        "secret" => $_ENV['SECRET_KEY'],
+        "error" => function ($response, $arguments) {
+            return $response->withJson([
+                "authorization" => false
+            ]);
+        }
     ]));
 
     $app->add(function ($req, $res, $next) {
