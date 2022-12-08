@@ -21,9 +21,6 @@
 
         public function register($data){
             $data['senha'] = password_hash($data['senha'], PASSWORD_DEFAULT);
-            
-            $data["data_nascimento"] = str_replace("/", "-", $data["data_nascimento"]);
-            $data["data_nascimento"] = date('Y-m-d', strtotime($data["data_nascimento"]));
 
             $crud = $this->crud;
 

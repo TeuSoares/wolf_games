@@ -61,8 +61,8 @@
         }
 
         public static function checkDateValid($date, $msg){
-            $explode = explode("/", $date);
-            $checkDate = checkdate($explode[1], $explode[0], $explode[2]);
+            $explode = explode("-", $date);
+            $checkDate = checkdate($explode[1], $explode[2], $explode[0]);
 
             if(!$checkDate){
                 array_push(self::$msg, Messages::setMessage("error", $msg));
