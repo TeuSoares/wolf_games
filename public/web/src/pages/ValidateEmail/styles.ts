@@ -36,6 +36,12 @@ export const Items = styled.div`
         color: #fff;
     }
 
+    img{
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+    }
+
     @media (max-width: 498px) {
         width: 100%;
         height: 100%;

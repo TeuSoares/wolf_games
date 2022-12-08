@@ -24,7 +24,7 @@
 
             $crud = $this->crud;
 
-            $crud->insert("clientes", $data);
+            $response = $crud->insert("clientes", $data);
 
             $emailUser = $crud->select([
                 "table" => "clientes",
@@ -45,7 +45,7 @@
             $mail = new Email($emailUser[0]["email"], "Confirmação de E-mail", "Código de verificação: $codeVerification");
             $mail->send();
 
-            return $emailUser;
+            return $emailUser[0]["id_cliente"];
         }
 
         public function verificationOfEmail($data){
@@ -63,9 +63,13 @@
                 ]
             ]);
 
-            $code = $codeVerification[0]["code_email"];
+            if(isset($codeVerification[0]["code_email"])){
+                $code = $codeVerification[0]["code_email"];
+            }else{
+                $code = 000000;
+            }
 
-            if(isset($code) == $codeInput){
+            if($code == $codeInput){
                 $crud->delete([
                     "table" => "codigo_verificacao",
                     "where" => "fk_id_cliente = :fk_id_cliente",

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Items = styled.div`
     width: 500px;
-    /* height: 100%; */
     border: 1px solid #9466ff;
     display: flex;
     flex-direction: column;
@@ -28,6 +27,12 @@ export const Items = styled.div`
 
     a:hover{
         text-decoration: underline;
+    }
+
+    img{
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
     }
 
     span{

@@ -6,7 +6,7 @@
     ->add(UserMiddlewares::class . ":verifyEmailOrCpfExists")
     ->add(UserMiddlewares::class . ":registerUserValidation");
 
-    $this->post("/verificationEmail", UserControllers::class . ":verificationOfEmail")
+    $this->post("/verificationEmail/{id}", UserControllers::class . ":verificationOfEmail")
     ->add(UserMiddlewares::class . ":verificationOfEmail");
 
     $this->post("/login", UserControllers::class . ":login")

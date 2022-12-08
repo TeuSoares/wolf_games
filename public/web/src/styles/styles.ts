@@ -18,6 +18,10 @@ interface ButtonProps {
     width?: string;
 }
 
+interface MessageProps {
+    status: string
+}
+
 export const Container = styled.div`
     width: 1140px;
     height: 100%;
@@ -57,7 +61,6 @@ export const Button = styled.button`
 export const AnimationInputText = styled.div`
     width: ${({width}: AnimationInputTextProps) => width};
     position: relative;
-    /* display: inline-block; */
 
     label{
         position: absolute;
@@ -103,4 +106,25 @@ export const AnimationInputText = styled.div`
         padding: 0 0.3em;
         color: #9466ff;
     }
+`
+
+export const Message = styled.div`
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px 10px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    font-size: .9em;
+
+    ${({status}: MessageProps) => status == "success" ? 
+        css`
+            background-color: rgba(72, 186, 38, 0.2);
+            border: 1px solid #48ba2633;
+        ` 
+    : 
+        css`
+            background-color: rgb(186, 38, 38, 0.2);
+            border: 1px solid #ba2626;
+        `};
 `
