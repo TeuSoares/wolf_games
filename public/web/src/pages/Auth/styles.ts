@@ -7,15 +7,11 @@ export const Items = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px 60px;
-
-    form{
-        width: 100%;
-    }
+    padding: 2.3rem 3.5rem;
 
     h1{
         color: #9466ff;
-        margin-bottom: 30px;
+        margin-bottom: 2rem;
         text-align: center;
     }
 
@@ -29,21 +25,21 @@ export const Items = styled.div`
         text-decoration: underline;
     }
 
+    span{
+        margin-top: 2rem;
+        margin-bottom: .6rem;
+        color: #fff;
+    }
+
     img{
         width: 20px;
         height: 20px;
         object-fit: cover;
     }
 
-    span{
-        margin-top: 30px;
-        margin-bottom: 8px;
-        color: #fff;
-    }
-
     @media (max-width: 498px) {
         width: 100%;
-        height: 100%;
+        padding: 2.3rem 1.5rem;
 
         h1{
             font-size: 1.5em;
@@ -52,7 +48,7 @@ export const Items = styled.div`
 
     @media (max-width: 280px) {
         width: 100%;
-        padding: 30px 20px;
+        padding: 2.3rem 1.2rem;
 
         h1{
             font-size: 1.2em;

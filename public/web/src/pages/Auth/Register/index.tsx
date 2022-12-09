@@ -1,8 +1,18 @@
-import axios from "axios";
-import { FormEvent, useState, ChangeEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, AnimationInputText, Button, Message } from "../../styles/styles";
-import { Items } from "./styles";
+import axios from "axios";
+
+// Hooks
+import useMessage from "../../../hooks/useMessage";
+import useChangeInput from "../../../hooks/useChangeInput";
+
+// Styles
+import { 
+    Container, 
+    AnimationInputText, 
+    Button, 
+} from "../../../styles/styles";
+import { Items } from "../styles";
 
 interface DataFormInterface {
     nome: string;
@@ -13,15 +23,11 @@ interface DataFormInterface {
     data_nascimento: string;
 }
 
-interface ResponseInterface {
-    status: string;
-    message: string;
-}
-
 const Register = () => {
-    const [dataForm, setData] = useState<Array<DataFormInterface>>();
-    const [response, setResponse] = useState<ResponseInterface | "">("");
     const [loading, setLoading] = useState<boolean>(false);
+
+    const { dataForm, handleChange } = useChangeInput();
+    const { msg, handleSetMessage, clearMessage } = useMessage();
 
     const navigate = useNavigate();
 
@@ -30,8 +36,10 @@ const Register = () => {
 
         setLoading(true);
 
+        const values: DataFormInterface | object = dataForm;
+
         try {
-            const { data } = await axios.post('http://localhost:8080/api/users/register', dataForm);
+            const { data } = await axios.post('http://localhost:8080/api/users/register', values);
 
             localStorage.setItem('id', data);
             
@@ -39,21 +47,17 @@ const Register = () => {
         } catch (error: any) {
             setLoading(false);
 
-            setResponse(error.response.data);
+            handleSetMessage(error.response.data);
 
-            setTimeout(() => {
-                setResponse("");
-            }, 5000);
+            clearMessage();
         }
     }
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => setData({ ...dataForm!, [e.target.name]: e.target.value});
-
     return ( 
-        <Container displayFlex justifyContent="center" alignItems="center">
+        <Container displayFlex justifyContent="center">
             <Items>
                 <h1>Criar Conta</h1>
-                {response && <Message status={response.status}>{response.message}</Message>}
+                {msg && msg}
                 <form onSubmit={handleSubmit}>
                     <AnimationInputText 
                         width="100%" 

@@ -24,7 +24,6 @@ interface MessageProps {
 
 export const Container = styled.div`
     width: 1140px;
-    height: 100%;
     margin: 0 auto;
 
     ${({displayFlex}: ContainerProps) => displayFlex && css`
@@ -45,7 +44,7 @@ export const Container = styled.div`
 export const Button = styled.button`
     width: ${({width}: ButtonProps) => width};
     border-style: none;
-    padding: 10px 18px;
+    padding: .8rem 1.2rem;
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
@@ -74,8 +73,8 @@ export const AnimationInputText = styled.div`
 
     input{
         width: 100%;
-        margin-bottom: 20px;
-        padding: 15px 10px;
+        margin-bottom: 1.4rem;
+        padding: 1rem .7rem;
         border-radius: 5px;
         border: ${({inputBorder}: AnimationInputTextProps) => "1px solid" + inputBorder};
         background: none;
@@ -110,8 +109,8 @@ export const AnimationInputText = styled.div`
 
 export const Message = styled.div`
     width: 100%;
-    margin-bottom: 20px;
-    padding: 15px 10px;
+    margin-bottom: 1.4rem;
+    padding: 1rem .7rem;
     border-radius: 5px;
     color: #fff;
     text-align: center;

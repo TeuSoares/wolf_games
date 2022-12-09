@@ -1,44 +1,51 @@
 import axios from "axios";
-import { useEffect, useState, FormEvent, ChangeEvent, useContext } from "react";
-import { Link, useLocation, useNavigate, } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import { Container, AnimationInputText, Button, Message } from "../../styles/styles";
-import { Items } from "./styles";
+import { Link, useNavigate, } from "react-router-dom";
 
-interface LocationStateInterface {
-    status: string;
-    message: string;
-}
+import { 
+    useState, 
+    FormEvent, 
+    useContext 
+} from "react";
+
+// Hooks
+import useMessage from "../../../hooks/useMessage";
+import useChangeInput from "../../../hooks/useChangeInput";
+
+// Contexts
+import { AuthContext } from "../../../contexts/AuthContext";
+
+// Styles
+import { 
+    Container, 
+    AnimationInputText, 
+    Button, 
+} from "../../../styles/styles";
+import { Items } from "../styles";
 
 interface DataFormInterface {
     email: string;
     senha: string;
 }
 
-interface ResponseInterface {
-    status: string;
-    message: string;
-}
-
 const Login = () => {
-    const [dataForm, setData] = useState<Array<DataFormInterface>>();
-    const [response, setResponse] = useState<ResponseInterface | "">("");
     const [loading, setLoading] = useState<boolean>(false);
 
-    const location = useLocation();
-    const [stateLocation, setStateLocation] = useState<LocationStateInterface | null>();
-
-    const { handleChangeAuthentication } = useContext(AuthContext);
+    const { dataForm, handleChange } = useChangeInput();
+    const { msg, handleSetMessage, clearMessage } = useMessage();
 
     const navigate = useNavigate();
+
+    const { handleChangeAuthentication } = useContext(AuthContext);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         setLoading(true);
 
+        const values: DataFormInterface | object = dataForm;
+
         try {
-            await axios.post('http://localhost:8080/api/users/login', dataForm);
+            await axios.post('http://localhost:8080/api/users/login', values);
 
             handleChangeAuthentication(true);
             
@@ -46,36 +53,21 @@ const Login = () => {
         } catch (error: any) {
             setLoading(false);
 
-            setResponse(error.response.data);
+            handleSetMessage(error.response.data);
 
             if(error.response.data.message == "Validação"){
                 navigate("/verifyEmail");
             }
 
-            setTimeout(() => {
-                setResponse("");
-            }, 5000);
+            clearMessage();
         }
     }
-
-    useEffect(() => {
-        if(location.state){
-            setStateLocation(location.state);
-
-            setTimeout(() => {
-                setStateLocation(null);
-            }, 5000)
-        }
-    }, []);
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => setData({ ...dataForm!, [e.target.name]: e.target.value});
 
     return ( 
         <Container displayFlex justifyContent="center" alignItems="center">
             <Items>
                 <h1>Fazer Login</h1>
-                {stateLocation && <Message status={stateLocation.status}>{stateLocation.message}</Message>}
-                {response && <Message status={response.status}>{response.message}</Message>}
+                {msg && msg}
                 <form onSubmit={handleSubmit}>
                     <AnimationInputText 
                         width="100%" 

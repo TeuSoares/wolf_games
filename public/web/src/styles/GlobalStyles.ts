@@ -26,10 +26,13 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     main{
-        /* height: 70vh; */
         background-color: #161618;
-        padding-top: 50px;
-        padding-bottom: 50px;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    form{
+        width: 100%;
     }
 
     a{

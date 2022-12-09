@@ -10,9 +10,9 @@ import { PrivateUserTrue, PrivateUserFalse } from "./components/authenticated/Pr
 
 // Pages
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ValidateEmail from "./pages/ValidateEmail";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import ValidateEmail from "./pages/Auth/ValidateEmail";
 
 function App() {
   return (
