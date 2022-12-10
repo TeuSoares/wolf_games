@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ValidateEmail from "./pages/Auth/ValidateEmail";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/login" element={<PrivateUserFalse children={<Login />} />} />
             <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
             <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

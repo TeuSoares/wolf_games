@@ -1,5 +1,5 @@
-import { useState, FormEvent } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, FormEvent, useEffect } from "react";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";
@@ -27,6 +27,14 @@ const ValidateEmail = () => {
     const { id } = useParams();
 
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if(!location.state || location.state.redirect != "login"){
+            navigate("/login", {state: {status: "error", message: "Faça seu login antes!"}});
+        }
+    }, []);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

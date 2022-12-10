@@ -58,7 +58,7 @@ const Login = () => {
             handleSetMessage(data);
 
             if(data.message == "Validação"){
-                navigate(`/verifyEmail/${data.values}`);
+                navigate(`/verifyEmail/${data.values}`, {state: {redirect: "login", status: "success", message: "Insira o código que foi enviado para seu e-mail"}});
             }
 
         }
