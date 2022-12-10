@@ -13,14 +13,12 @@ const useMessage = () => {
         setElement(<Message status={msg.status}>{msg.message}</Message>);
     }
 
-    const clearMessage = () => {
-        setTimeout(() => {
-            setElement(undefined);
-        }, 3000)
-    };
-
     useEffect(() => {
         setMsg(element);
+
+        setTimeout(() => {
+            setMsg(undefined);
+        }, 3000)
     }, [element]);
 
     useEffect(() => {
@@ -37,8 +35,7 @@ const useMessage = () => {
 
     return {
         msg,
-        handleSetMessage,
-        clearMessage
+        handleSetMessage
     }
 }
 

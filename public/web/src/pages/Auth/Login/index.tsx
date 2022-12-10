@@ -31,7 +31,7 @@ const Login = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const { dataForm, handleChange } = useChangeInput();
-    const { msg, handleSetMessage, clearMessage } = useMessage();
+    const { msg, handleSetMessage } = useMessage();
 
     const navigate = useNavigate();
 
@@ -58,8 +58,6 @@ const Login = () => {
             if(error.response.data.message == "Validação"){
                 navigate("/verifyEmail");
             }
-
-            clearMessage();
         }
     }
 

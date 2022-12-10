@@ -27,7 +27,7 @@ const Register = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const { dataForm, handleChange } = useChangeInput();
-    const { msg, handleSetMessage, clearMessage } = useMessage();
+    const { msg, handleSetMessage } = useMessage();
 
     const navigate = useNavigate();
 
@@ -48,8 +48,6 @@ const Register = () => {
             setLoading(false);
 
             handleSetMessage(error.response.data);
-
-            clearMessage();
         }
     }
 
