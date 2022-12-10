@@ -1,10 +1,10 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";
 import useChangeInput from "../../../hooks/useChangeInput";
+import useQuery from "../../../hooks/useQuery";
 
 // Styles
 import { 
@@ -29,6 +29,8 @@ const Register = () => {
     const { dataForm, handleChange } = useChangeInput();
     const { msg, handleSetMessage } = useMessage();
 
+    const handleQuery = useQuery();
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,16 +40,18 @@ const Register = () => {
 
         const values: DataFormInterface | object = dataForm;
 
-        try {
-            const { data } = await axios.post('http://localhost:8080/api/users/register', values);
+        const { status, data } = await handleQuery("POST", "users/register", values);
+
+        if(status === "success") {
 
             localStorage.setItem('id', data);
-            
             navigate("/login", {state: {status: "success", message: "Cadastro realizado com sucesso!"}});
-        } catch (error: any) {
-            setLoading(false);
 
-            handleSetMessage(error.response.data);
+        }else if(status === "error"){
+
+            setLoading(false);
+            handleSetMessage(data);
+
         }
     }
 

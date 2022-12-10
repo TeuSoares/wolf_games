@@ -95,8 +95,6 @@
 
             $jwt = JWT::encode($payload, $key, 'HS256');
 
-            setcookie('token', $jwt, time() + (1 * 24 * 60 * 60));
-
             return [
                 "autenticação" => true,
                 "token" => $jwt

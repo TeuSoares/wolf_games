@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Link, useNavigate, } from "react-router-dom";
 
 import { 
@@ -10,6 +9,7 @@ import {
 // Hooks
 import useMessage from "../../../hooks/useMessage";
 import useChangeInput from "../../../hooks/useChangeInput";
+import useQuery from "../../../hooks/useQuery";
 
 // Contexts
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -33,6 +33,8 @@ const Login = () => {
     const { dataForm, handleChange } = useChangeInput();
     const { msg, handleSetMessage } = useMessage();
 
+    const handleQuery = useQuery();
+
     const navigate = useNavigate();
 
     const { handleChangeAuthentication } = useContext(AuthContext);
@@ -44,20 +46,23 @@ const Login = () => {
 
         const values: DataFormInterface | object = dataForm;
 
-        try {
-            await axios.post('http://localhost:8080/api/users/login', values);
+        const { status, data } = await handleQuery("POST", "users/login", values);
+        
+        if(status === "success") {
 
             handleChangeAuthentication(true);
-            
+            localStorage.setItem("token", data.token);
             navigate("/");
-        } catch (error: any) {
+            
+        }else if(status === "error"){
+
             setLoading(false);
+            handleSetMessage(data);
 
-            handleSetMessage(error.response.data);
-
-            if(error.response.data.message == "Validação"){
+            if(data.message == "Validação"){
                 navigate("/verifyEmail");
             }
+
         }
     }
 
