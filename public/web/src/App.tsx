@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<PrivateUserFalse children={<Login />} />} />
             <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
-            <Route path="/verifyEmail" element={<PrivateUserFalse children={<ValidateEmail />} />} />
+            <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
           </Routes>
         </main>
         <Footer />

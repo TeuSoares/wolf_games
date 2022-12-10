@@ -87,8 +87,8 @@
             }
         }
 
-        public static function setErrors($msg){
-            array_push(self::$msg, Messages::setMessage("error", $msg));
+        public static function setErrors($msg, $values = null){
+            array_push(self::$msg, Messages::setMessage("error", $msg, $values));
         }
 
         public static function getErrors(){

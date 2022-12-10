@@ -29,8 +29,6 @@ const Register = () => {
     const { dataForm, handleChange } = useChangeInput();
     const { msg, handleSetMessage } = useMessage();
 
-    const handleQuery = useQuery();
-
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -40,12 +38,11 @@ const Register = () => {
 
         const values: DataFormInterface | object = dataForm;
 
-        const { status, data } = await handleQuery("POST", "users/register", values);
+        const { status, data } = await useQuery("POST", "users/register", values);
 
         if(status === "success") {
 
-            localStorage.setItem('id', data);
-            navigate("/login", {state: {status: "success", message: "Cadastro realizado com sucesso!"}});
+            navigate("/login", {state: data});
 
         }else if(status === "error"){
 

@@ -45,7 +45,7 @@
             $mail = new Email($emailUser[0]["email"], "Confirmação de E-mail", "Código de verificação: $codeVerification");
             $mail->send();
 
-            return $emailUser[0]["id_cliente"];
+            return $response;
         }
 
         public function verificationOfEmail($data){
@@ -84,10 +84,10 @@
             }
         }
 
-        public function login($data){
+        public function login($id){
             $payload = [
                 "exp" => time() + (1 * 24 * 60 * 60),
-                "email" => $data["email"],
+                "id" => $id,
                 "iat" => time()
             ];
 

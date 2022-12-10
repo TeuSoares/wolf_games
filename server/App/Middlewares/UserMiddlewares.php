@@ -132,7 +132,7 @@
 
             $data = $crud->select([
                 "table" => "clientes",
-                "fields" => "email, senha, status_conta, code_email",
+                "fields" => "id_cliente, email, senha, status_conta, code_email",
                 "join" => "LEFT JOIN codigo_verificacao ON codigo_verificacao.fk_id_cliente = id_cliente",
                 "where" => "email = :email",
                 "values" => [
@@ -157,11 +157,13 @@
                 }
 
                 if($data[0]["code_email"] != ""){ 
-                    Validation::setErrors("Validação"); 
+                    Validation::setErrors("Validação", $data[0]["id_cliente"]); 
                 }
             }
 
             $errors = Validation::getErrors();
+
+            $request = $request->withAttribute('id', $data[0]["id_cliente"]);
 
             return Validation::send($errors, $request, $response, $next);
         }

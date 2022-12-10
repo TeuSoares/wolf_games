@@ -44,11 +44,11 @@
         }
 
         public function login(Request $request, Response $response){
-            $data = $request->getParsedBody();
+            $id_cliente = $request->getAttribute('id');
 
             $model = $this->model;
 
-            $return = $model->login($data);
+            $return = $model->login($id_cliente);
 
             return $response->withJson($return);
         }

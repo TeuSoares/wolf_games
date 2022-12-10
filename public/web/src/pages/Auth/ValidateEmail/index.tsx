@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";
@@ -24,7 +24,7 @@ const ValidateEmail = () => {
     const { dataForm, handleChange } = useChangeInput();
     const { msg, handleSetMessage } = useMessage();
 
-    const handleQuery = useQuery();
+    const { id } = useParams();
 
     const navigate = useNavigate();
 
@@ -33,15 +33,12 @@ const ValidateEmail = () => {
 
         setLoading(true);
 
-        const id = localStorage.getItem("id");
-
         const values: DataFormInterface | object = dataForm;
 
-        const { status, data } = await handleQuery("POST", `users/verificationEmail/${id}`, values);
+        const { status, data } = await useQuery("POST", `users/verificationEmail/${id}`, values);
 
         if(status === "success") {
 
-            localStorage.removeItem("id");
             navigate("/login", {state: data});
 
         }else if(status === "error"){
