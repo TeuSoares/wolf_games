@@ -29,6 +29,11 @@ export const GlobalStyles = createGlobalStyle`
         background-color: #161618;
         padding-top: 4rem;
         padding-bottom: 4rem;
+        flex: 1 0 auto;
+    }
+
+    footer{
+        flex-shrink: 0;
     }
 
     form{

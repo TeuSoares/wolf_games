@@ -22,6 +22,12 @@ interface MessageProps {
     status: string
 }
 
+export const ContainerApp = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+`
+
 export const Container = styled.div`
     width: 1140px;
     margin: 0 auto;
