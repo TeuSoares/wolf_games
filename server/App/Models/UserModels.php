@@ -1,7 +1,7 @@
 <?php
     namespace App\Models;
 
-    $dotenv = \Dotenv\Dotenv::createImmutable("F:\Programação\Desenvolvimento\projetos\wolfGames\cliente\server");
+    $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
     $dotenv->load();
 
     use Firebase\JWT\JWT;

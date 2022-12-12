@@ -7,7 +7,7 @@
 
     use App\Helpers\Messages;
 
-    $dotenv = \Dotenv\Dotenv::createImmutable("F:\Programação\Desenvolvimento\projetos\wolfGames\cliente\server");
+    $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
     $dotenv->load();
 
     class Email{

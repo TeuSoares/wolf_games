@@ -163,7 +163,9 @@
 
             $errors = Validation::getErrors();
 
-            $request = $request->withAttribute('id', $data[0]["id_cliente"]);
+            if(!$errors){
+                $request = $request->withAttribute('id', $data[0]["id_cliente"]);
+            }
 
             return Validation::send($errors, $request, $response, $next);
         }
