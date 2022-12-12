@@ -169,5 +169,61 @@
 
             return Validation::send($errors, $request, $response, $next);
         }
+
+        public function validationFieldsProfileUpdate(Request $request, Response $response, $next){
+            $data = $request->getParsedBody();
+
+            Validation::checkEmptyFields($data);
+
+            if(isset($data["nome"])){
+                $nome = $data["nome"];
+
+                Validation::verifyFieldLength([["$nome < 4", "O nome não pode conter menos de 4 caracteres!"]]);
+                Validation::onlyLetters(["nome" => $nome,]);
+            }
+
+            if(isset($data["cpf"])){
+                $cpf = $data["cpf"];
+
+                Validation::verifyFieldLength([["$cpf != 11", "Formato de cpf inválido!"]]);
+                Validation::verifyFieldIsNumeric(["cpf" => $cpf]);
+            }
+
+            if(isset($data["email"])){
+                $email = $data["email"];
+
+                if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    Validation::setErrors("Esse e-mail é inválido!");
+                }
+            }
+
+            if(isset($data["senha"])){
+                $senha = $data["senha"];
+
+                Validation::verifyFieldLength([
+                    ["$senha < 6", "A senha não pode conter menos de 6 caracteres!"],
+                    ["$senha > 12", "A senha não pode conter mais de 12 caracteres!"]
+                ]);
+
+                Validation::onlyLettersAndNumbers(["senha" => $senha]);
+            }
+
+            if(isset($data["celular"])){
+                $celular = $data["celular"];
+
+                Validation::verifyFieldLength([["$celular != 11", "Formato de celular inválido!"]]);
+                Validation::verifyFieldIsNumeric(["celular" => $celular]);
+            }
+
+            if(isset($data["data_nascimento"])){
+                $nascimento = $data["data_nascimento"];
+
+                Validation::checkDateValid($nascimento, "Essa data não é válida!");
+            }
+
+            $errors = Validation::getErrors();
+
+            return Validation::send($errors, $request, $response, $next);
+        }
     }
 ?>

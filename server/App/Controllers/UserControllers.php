@@ -52,5 +52,26 @@
 
             return $response->withJson($return);
         }
+
+        public function profile(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+
+            $model = $this->model;
+
+            $return = $model->profile($token);
+
+            return $response->withJson($return);
+        }
+
+        public function profileUpdate(Request $request, Response $response){
+            $data = $request->getParsedBody();
+            $token = $request->getAttribute("token");
+
+            $model = $this->model;
+
+            $return = $model->profileUpdate([$data, $token]);
+
+            return $response->withJson($return);
+        }
     }
 ?>

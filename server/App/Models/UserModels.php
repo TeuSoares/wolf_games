@@ -100,5 +100,42 @@
                 "token" => $jwt
             ];
         }
+
+        public function profile($token){
+            $crud = $this->crud;
+
+            $response = $crud->select([
+                "table" => "clientes",
+                "fields" => "nome, email, cpf, data_nascimento, celular",
+                "where" => "id_cliente = :id_cliente",
+                "values" => [
+                    [":id_cliente", $token["id"]],
+                ]
+            ]);
+
+            return $response;
+        }
+
+        public function profileUpdate(array $data){
+            $values = $data[0];
+            $token = $data[1];
+
+            if(isset($values["senha"])){
+                $values['senha'] = password_hash($values['senha'], PASSWORD_DEFAULT);
+            }
+
+            $crud = $this->crud;
+
+            $response = $crud->update([
+                "table" => "clientes",
+                "fields" => $values,
+                "where" => "id_cliente = :id_cliente",
+                "values" => [
+                    [":id_cliente", $token["id"]],
+                ]
+            ]);
+
+            return $response;
+        }
     }
 ?>

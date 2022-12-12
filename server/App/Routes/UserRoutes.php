@@ -12,4 +12,9 @@
     $this->post("/login", UserControllers::class . ":login")
     ->add(UserMiddlewares::class . ":checkIfUsersIsValid")
     ->add(UserMiddlewares::class . ":validationFieldsLogin");
+
+    $this->get("/profile", UserControllers::class . ":profile");
+
+    $this->put("/profile/update", UserControllers::class . ":profileUpdate")
+    ->add(UserMiddlewares::class . ":validationFieldsProfileUpdate");
 ?>
