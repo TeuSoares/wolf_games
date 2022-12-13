@@ -33,6 +33,8 @@ const Login = () => {
     const { dataForm, handleChange } = useChangeInput();
     const { msg, handleSetMessage } = useMessage();
 
+    const handleQuery = useQuery();
+
     const navigate = useNavigate();
 
     const { handleChangeAuthentication } = useContext(AuthContext);
@@ -44,7 +46,7 @@ const Login = () => {
 
         const values: DataFormInterface | object = dataForm;
 
-        const { status, data } = await useQuery("POST", "users/login", values);
+        const { status, data } = await handleQuery("POST", "users/login", values);
         
         if(status === "success") {
 

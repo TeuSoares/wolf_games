@@ -24,6 +24,8 @@ const ValidateEmail = () => {
     const { dataForm, handleChange } = useChangeInput();
     const { msg, handleSetMessage } = useMessage();
 
+    const handleQuery = useQuery();
+
     const { id } = useParams();
 
     const navigate = useNavigate();
@@ -43,7 +45,7 @@ const ValidateEmail = () => {
 
         const values: DataFormInterface | object = dataForm;
 
-        const { status, data } = await useQuery("POST", `users/verificationEmail/${id}`, values);
+        const { status, data } = await handleQuery("POST", `users/verificationEmail/${id}`, values);
 
         if(status === "success") {
 

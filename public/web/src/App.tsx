@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Contexts
 import { AuthContextProvider } from "./contexts/AuthContext";
 
+// Styles
+import { ContainerApp } from "./styles/styles";
+
 // Components
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -14,7 +17,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ValidateEmail from "./pages/Auth/ValidateEmail";
 import NotFound from "./pages/NotFound";
-import { ContainerApp } from "./styles/styles";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -28,6 +31,7 @@ function App() {
               <Route path="/login" element={<PrivateUserFalse children={<Login />} />} />
               <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
               <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
+              <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
