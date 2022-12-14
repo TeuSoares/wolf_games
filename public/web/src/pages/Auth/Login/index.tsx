@@ -18,9 +18,9 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { 
     Container, 
     AnimationInputText, 
-    Button, 
+    Button,
+    Form, 
 } from "../../../styles/styles";
-import { Items } from "../styles";
 
 interface DataFormInterface {
     email: string;
@@ -44,7 +44,7 @@ const Login = () => {
 
         setLoading(true);
 
-        const values: DataFormInterface | object = dataForm;
+        const values: DataFormInterface = dataForm;
 
         const { status, data } = await handleQuery("POST", "users/login", values);
         
@@ -68,41 +68,29 @@ const Login = () => {
 
     return ( 
         <Container displayFlex justifyContent="center" alignItems="center">
-            <Items>
+            <Form width="500px" onSubmit={handleSubmit}>
                 <h1>Fazer Login</h1>
                 {msg && msg}
-                <form onSubmit={handleSubmit}>
-                    <AnimationInputText 
-                        width="100%" 
-                        color="#fff" 
-                        inputBorder="#fff" 
-                        backgroundLabel="#161618"
-                    >
-                        <input type="email" name="email" required onChange={handleChange} />
-                        <label htmlFor="email">E-mail</label>
-                    </AnimationInputText>
-                    <AnimationInputText 
-                        width="100%" 
-                        color="#fff" 
-                        inputBorder="#fff" 
-                        backgroundLabel="#161618"
-                    >
-                        <input type="password" name="senha" required onChange={handleChange} />
-                        <label htmlFor="senha">Senha</label>
-                    </AnimationInputText>
-                    {!loading ? (
-                        <Button width="100%" type="submit">
-                            Entrar
-                        </Button>
-                    ) : (
-                        <Button width="100%" type="submit" disabled>
-                            <img src="src/assets/loading.svg" />
-                        </Button>
-                    )}
-                </form>
+                <AnimationInputText>
+                    <input type="email" name="email" required onChange={handleChange} />
+                    <label htmlFor="email">E-mail</label>
+                </AnimationInputText>
+                <AnimationInputText>
+                    <input type="password" name="senha" required onChange={handleChange} />
+                    <label htmlFor="senha">Senha</label>
+                </AnimationInputText>
+                {!loading ? (
+                    <Button width="100%" type="submit">
+                        Entrar
+                    </Button>
+                ) : (
+                    <Button width="100%" type="submit" disabled>
+                        <img src="src/assets/loading.svg" />
+                    </Button>
+                )}
                 <span>Novo na Wolf Games?</span>
                 <Link to="/register">Cadastre-se</Link>
-            </Items>
+            </Form>
         </Container>
     );
 }

@@ -8,18 +8,21 @@ interface ContainerProps {
 }
 
 interface AnimationInputTextProps {
-    width: string;
-    color: string;
-    inputBorder: string;
-    backgroundLabel: string;
+    width?: string;
 }
 
 interface ButtonProps {
     width?: string;
+    background?: string;
+    backgroundHover?: string;
 }
 
 interface MessageProps {
-    status: string
+    status: string;
+}
+
+interface FormProps {
+    width?: string;
 }
 
 export const ContainerApp = styled.div`
@@ -54,17 +57,17 @@ export const Button = styled.button`
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #9466ff;
+    background-color: ${({background}: ButtonProps) => background ? background : "#9466ff"};
     transition: all 0.5s ease;
     color: #fff;
 
     &:hover{
-        background-color: #8257e5;
+        background-color: ${({backgroundHover}: ButtonProps) => backgroundHover ? backgroundHover : "#8257e5"};
     }
 `
 
 export const AnimationInputText = styled.div`
-    width: ${({width}: AnimationInputTextProps) => width};
+    width: ${({width}: AnimationInputTextProps) => width ? width : "100%"};
     position: relative;
 
     label{
@@ -72,7 +75,7 @@ export const AnimationInputText = styled.div`
         left: 16px;
         pointer-events: none;
         transform: translateY(1rem);
-        color: ${({color}: AnimationInputTextProps) => color};
+        color: #fff;
         font-size: .9em;
         transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -82,7 +85,7 @@ export const AnimationInputText = styled.div`
         margin-bottom: 1.4rem;
         padding: 1rem .7rem;
         border-radius: 5px;
-        border: ${({inputBorder}: AnimationInputTextProps) => "1px solid" + inputBorder};
+        border: 1px solid #fff;
         background: none;
         color: #fff;
         transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -99,14 +102,14 @@ export const AnimationInputText = styled.div`
     }
 
     input:focus ~ label{
-        background-color: ${({backgroundLabel}: AnimationInputTextProps) => backgroundLabel};
+        background-color: #161618;
         transform: translateY(-50%) scale(0.8);
         padding: 0 0.3em;
         color: #9466ff;
     }
 
     input:not(:invalid) ~ label{
-        background-color: ${({backgroundLabel}: AnimationInputTextProps) => backgroundLabel};
+        background-color: #161618;
         transform: translateY(-50%) scale(0.8);
         padding: 0 0.3em;
         color: #9466ff;
@@ -132,4 +135,60 @@ export const Message = styled.div`
             background-color: rgb(186, 38, 38, 0.2);
             border: 1px solid #ba2626;
         `};
+`
+
+export const Form = styled.form`
+    width: ${({width}: FormProps) => width};
+    border: 1px solid #9466ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.3rem 3.5rem;
+
+    h1{
+        color: #9466ff;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    a{
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #9466ff;
+    }
+
+    a:hover{
+        text-decoration: underline;
+    }
+
+    span{
+        margin-top: 2rem;
+        margin-bottom: .6rem;
+        color: #fff;
+    }
+
+    img{
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+    }
+
+    @media (max-width: 498px) {
+        width: 100%;
+        padding: 2.3rem 1.5rem;
+
+        h1{
+            font-size: 1.5em;
+        }
+    }
+
+    @media (max-width: 280px) {
+        width: 100%;
+        padding: 2.3rem 1.2rem;
+
+        h1{
+            font-size: 1.2em;
+        }
+    }
 `

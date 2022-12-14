@@ -106,7 +106,7 @@
 
             $response = $crud->select([
                 "table" => "clientes",
-                "fields" => "nome, email, cpf, DATE_FORMAT(STR_TO_DATE(data_nascimento, '%Y-%m-%d'), '%d/%m/%Y') as nascimento, celular",
+                "fields" => "nome, email, cpf, data_nascimento, celular",
                 "where" => "id_cliente = :id_cliente",
                 "values" => [
                     [":id_cliente", $token["id"]],

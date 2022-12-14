@@ -11,8 +11,8 @@ import {
     Container, 
     AnimationInputText, 
     Button,
+    Form,
 } from "../../../styles/styles";
-import { Items } from "../styles";
 
 interface DataFormInterface {
     codeInput: string;
@@ -43,7 +43,7 @@ const ValidateEmail = () => {
 
         setLoading(true);
 
-        const values: DataFormInterface | object = dataForm;
+        const values: DataFormInterface = dataForm;
 
         const { status, data } = await handleQuery("POST", `users/verificationEmail/${id}`, values);
 
@@ -61,32 +61,25 @@ const ValidateEmail = () => {
 
     return ( 
         <Container displayFlex justifyContent="center" alignItems="center">
-        <Items>
-            <h1>Verifique seu E-mail</h1>
-            {msg && msg}
-            <form onSubmit={handleSubmit}>
-                <AnimationInputText 
-                    width="100%" 
-                    color="#fff" 
-                    inputBorder="#fff" 
-                    backgroundLabel="#161618"
-                >
+            <Form width="500px" onSubmit={handleSubmit}>
+                <h1>Verifique seu E-mail</h1>
+                {msg && msg}
+                <AnimationInputText>
                     <input type="text" name="codeInput" required onChange={handleChange} />
                     <label htmlFor="verifyEmail">Código</label>
                 </AnimationInputText>
                 {!loading ? (
-                        <Button width="100%" type="submit">
-                            Validar
-                        </Button>
-                    ) : (
-                        <Button width="100%" type="submit" disabled>
-                            <img src="src/assets/loading.svg" />
-                        </Button>
-                    )}
-            </form>
-            <span>Já verificou?</span>
-            <Link to="/login">Fazer Login</Link>
-        </Items>
+                    <Button width="100%" type="submit">
+                        Validar
+                    </Button>
+                ) : (
+                    <Button width="100%" type="submit" disabled>
+                        <img src="src/assets/loading.svg" />
+                    </Button>
+                )}
+                <span>Já verificou?</span>
+                <Link to="/login">Fazer Login</Link>
+            </Form>
     </Container>
     );
 }
