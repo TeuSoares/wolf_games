@@ -9,10 +9,10 @@ import useQuery from "../../../hooks/useQuery";
 // Styles
 import { 
     Container, 
-    AnimationInputText, 
     Button,
     Form,
 } from "../../../styles/styles";
+import InputAnimated from "../../../components/Layout/Input";
 
 interface DataFormInterface {
     codeInput: string;
@@ -64,10 +64,12 @@ const ValidateEmail = () => {
             <Form width="500px" onSubmit={handleSubmit}>
                 <h1>Verifique seu E-mail</h1>
                 {msg && msg}
-                <AnimationInputText>
-                    <input type="text" name="codeInput" required onChange={handleChange} />
-                    <label htmlFor="verifyEmail">Código</label>
-                </AnimationInputText>
+                <InputAnimated 
+                    type="text" 
+                    name="codeInput" 
+                    handleChange={handleChange}
+                    label="Código"
+                />
                 {!loading ? (
                     <Button width="100%" type="submit">
                         Validar

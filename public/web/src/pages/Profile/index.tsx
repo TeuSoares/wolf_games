@@ -1,10 +1,15 @@
+// Hooks
 import { useEffect, useState, FormEvent } from "react";
 import useChangeInput from "../../hooks/useChangeInput";
 import useMessage from "../../hooks/useMessage";
 import useQuery from "../../hooks/useQuery";
 
-import { AnimationInputText, Button, Form } from "../../styles/styles";
+// Styles
+import { Button, Form } from "../../styles/styles";
 import { ContainerProfile, Items, Key, ProfileHeader, Value } from "./styles";
+
+// Components
+import InputAnimated from "../../components/Layout/Input";
 
 interface DataFormInterface {
     nome: string;
@@ -117,64 +122,49 @@ const Profile = () => {
                 <>
                     {!loading && (
                         <Form width="100%" onSubmit={handleSubmit}>
-                            <AnimationInputText>
-                                <input 
-                                    type="text" 
-                                    name="nome" 
-                                    required 
-                                    onChange={handleChange}
-                                    value={values!.nome}
-                                />
-                                <label htmlFor="nome">Nome Completo</label>
-                            </AnimationInputText>
-                            <AnimationInputText>
-                                <input 
-                                    type="text" 
-                                    name="cpf" 
-                                    required 
-                                    onChange={handleChange}
-                                    value={values!.cpf} 
-                                />
-                                <label htmlFor="cpf">CPF</label>
-                            </AnimationInputText>
-                            <AnimationInputText>
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    required 
-                                    onChange={handleChange}
-                                    value={values!.email} 
-                                />
-                                <label htmlFor="email">E-mail</label>
-                            </AnimationInputText>
-                            <AnimationInputText>
-                                <input 
-                                    type="text" 
-                                    name="celular" 
-                                    required 
-                                    onChange={handleChange}
-                                    value={values!.celular} 
-                                />
-                                <label htmlFor="celular">Celular</label>
-                            </AnimationInputText>
-                            <AnimationInputText>
-                                <input 
-                                    type="date" 
-                                    name="data_nascimento" 
-                                    onChange={handleChange}
-                                    value={values!.data_nascimento}
-                                />
-                                <label htmlFor="data_nascimento">Data de Nascimento</label>
-                            </AnimationInputText>
-                            <AnimationInputText>
-                                <input 
-                                    type="password" 
-                                    name="senha" 
-                                    onChange={handleChange}
-                                    placeholder="*****************"
-                                />
-                                <label htmlFor="senha">Senha</label>
-                            </AnimationInputText>
+                            <InputAnimated 
+                                type="text" 
+                                name="nome" 
+                                handleChange={handleChange} 
+                                label="Nome Completo" 
+                                value={values!.nome} 
+                            />
+                            <InputAnimated 
+                                type="text" 
+                                name="cpf"
+                                handleChange={handleChange}
+                                label="CPF"
+                                value={values!.cpf} 
+                            />
+                            <InputAnimated 
+                                type="email" 
+                                name="email" 
+                                handleChange={handleChange}
+                                label="E-mail"
+                                value={values!.email} 
+                            />
+                            <InputAnimated 
+                                type="text" 
+                                name="celular" 
+                                handleChange={handleChange}
+                                label="Celular"
+                                value={values!.celular} 
+                            />
+                            <InputAnimated 
+                                type="date" 
+                                name="data_nascimento" 
+                                handleChange={handleChange}
+                                label="Data de Nascimento"
+                                value={values!.data_nascimento}
+                            />
+                            <InputAnimated 
+                                type="password" 
+                                name="senha" 
+                                handleChange={handleChange}
+                                label="Senha"
+                                placeholder="*****************"
+                                required={false}
+                            />
                             {!loading ? (
                                 <Button width="100%" type="submit">
                                     Atualizar
