@@ -20,6 +20,7 @@
 
                 $conn = new \PDO('mysql:host='.self::$host.';dbname='.self::$dbname,self::$username,self::$password);
                 $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                $conn->exec("SET CHARACTER SET utf8");
                 
                 return $conn;
             }catch(\PDOException $e){
