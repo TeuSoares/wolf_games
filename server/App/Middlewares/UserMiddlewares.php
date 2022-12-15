@@ -6,7 +6,6 @@
 
     use App\Helpers\Crud;
     use App\Helpers\Validation;
-    use App\Helpers\tokenJWT;
 
     class UserMiddlewares {
         private $crud;

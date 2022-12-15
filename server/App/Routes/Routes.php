@@ -13,5 +13,9 @@
             require_once __DIR__ . "/PurchaseRoutes.php";
         });
 
+        $this->group('/admin', function () {
+            require_once __DIR__ . "/AdminRoutes.php";
+        });
+
     });
 ?>
