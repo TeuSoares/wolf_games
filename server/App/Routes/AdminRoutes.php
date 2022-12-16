@@ -2,6 +2,8 @@
     use App\Controllers\AdminControllers;
     use App\Middlewares\AdminMiddlewares;
 
+    header("Access-Control-Allow-Origin:*");
+
     $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
     $dotenv->load();
 

@@ -18,7 +18,7 @@ export const AnimationInputText = styled.div`
         transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    input{
+    input, textarea{
         width: 100%;
         margin-bottom: 1.4rem;
         padding: 1rem .7rem;
@@ -29,24 +29,24 @@ export const AnimationInputText = styled.div`
         transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    input:focus{
+    input:focus, textarea:focus{
         outline: none;
         border: 1px solid #9466ff;
     }
 
-    input:not(:invalid){
+    input:not(:invalid), textarea:not(:invalid){
         outline: none;
         border: 1px solid #9466ff;
     }
 
-    input:focus ~ label{
+    input:focus ~ label, textarea:focus ~ label{
         background-color: #161618;
         transform: translateY(-50%) scale(0.8);
         padding: 0 0.3em;
         color: #9466ff;
     }
 
-    input:not(:invalid) ~ label{
+    input:not(:invalid) ~ label, textarea:not(:invalid) ~ label{
         background-color: #161618;
         transform: translateY(-50%) scale(0.8);
         padding: 0 0.3em;

@@ -12,7 +12,7 @@ import {
     Button,
     Form,
 } from "../../../styles/styles";
-import InputAnimated from "../../../components/Layout/Input";
+import InputAnimated from "../../../components/Layout/Form/Input";
 
 interface DataFormInterface {
     codeInput: string;

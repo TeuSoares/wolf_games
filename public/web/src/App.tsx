@@ -9,7 +9,7 @@ import { ContainerApp } from "./styles/styles";
 // Components
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { PrivateUserTrue, PrivateUserFalse } from "./components/Authenticated/Privates";
+import { PrivateUserTrue, PrivateUserFalse, PrivateAdminTrue, PrivateAdminFalse } from "./components/Authenticated/Privates";
 
 // Pages
 import Home from "./pages/Home";
@@ -35,9 +35,9 @@ function App() {
               <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
               <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
               <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
-              <Route path="/admin/login" element={<LoginAdmin />} />
-              <Route path="/admin/register" element={<RegisterAdmin />} />
-              <Route path="/admin/insertProducts" element={<InsertProducts />} />
+              <Route path="/admin/login" element={<PrivateAdminFalse children={<LoginAdmin />} />} />
+              <Route path="/admin/register" element={<PrivateAdminFalse children={<RegisterAdmin />} />} />
+              <Route path="/admin/insertProducts" element={<PrivateAdminTrue children={<InsertProducts />} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

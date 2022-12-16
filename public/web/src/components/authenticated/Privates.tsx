@@ -35,3 +35,27 @@ export const PrivateUserFalse = ({ children }: PropsInterface) => {
     }
     
 }
+
+export const PrivateAdminTrue = ({ children }: PropsInterface) => {
+    if(localStorage.getItem("token_admin")){
+        return (
+            <>
+                {children}
+            </>
+        );
+    }else{
+        return <Navigate to="/admin/login" />
+    }
+}
+
+export const PrivateAdminFalse = ({ children }: PropsInterface) => {
+    if(!localStorage.getItem("token_admin")){
+        return (
+            <>
+                {children}
+            </>
+        );
+    }else{
+        return <Navigate to="/admin/insertProducts" />
+    }
+}

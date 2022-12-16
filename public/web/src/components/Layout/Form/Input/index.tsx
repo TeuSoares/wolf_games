@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { AnimationInputText } from "./styles";
+import { AnimationInputText } from "../styles";
 
 interface InputAnimatedInterface {
     type: string;
@@ -9,7 +9,7 @@ interface InputAnimatedInterface {
     width?: string;
     required?: boolean;
     placeholder?: string;
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputAnimated = ({type, name, handleChange, value, label, width, required = true, placeholder}: InputAnimatedInterface) => {

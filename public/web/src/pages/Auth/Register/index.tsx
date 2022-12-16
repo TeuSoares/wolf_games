@@ -14,7 +14,7 @@ import {
 } from "../../../styles/styles";
 
 // Components
-import InputAnimated from "../../../components/Layout/Input";
+import InputAnimated from "../../../components/Layout/Form/Input";
 
 interface DataFormInterface {
     nome: string;

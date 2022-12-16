@@ -3,7 +3,7 @@ import { useState, ChangeEvent } from "react";
 const useChangeInput = () => {
     const [ dataForm, setDataForm ] = useState<any>();
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setDataForm({ ...dataForm!, [e.target.name]: e.target.value});
     };
 

@@ -28,7 +28,7 @@
 
             }catch(\PDOException $e){
                 http_response_code(500);
-                echo $e->getMessage();
+                // echo $e->getMessage();
                 die(json_encode(Messages::setMessage("error", "Houve algum problema no servidor. Tente novamente mais tarde!")));
             }
         }

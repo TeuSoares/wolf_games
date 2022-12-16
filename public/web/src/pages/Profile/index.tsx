@@ -9,7 +9,7 @@ import { Button, Form } from "../../styles/styles";
 import { ContainerProfile, Items, Key, ProfileHeader, Value } from "./styles";
 
 // Components
-import InputAnimated from "../../components/Layout/Input";
+import InputAnimated from "../../components/Layout/Form/Input";
 
 interface DataFormInterface {
     nome: string;

@@ -73,7 +73,7 @@
             }
 
             $payload = [
-                "exp" => time() + (1 * 24 * 60 * 60),
+                "exp" => time() + (14 * 24 * 60 * 60),
                 "status" => "admin",
                 "access" => "total",
                 "id_admin" => $data[0]["id_admin"],
@@ -85,7 +85,7 @@
             $jwt = JWT::encode($payload, $key, 'HS256');
 
             return [
-                "autenticação" => true,
+                "status" => "success",
                 "token_admin" => $jwt
             ];
         }
@@ -111,6 +111,10 @@
                 if($row > 0){
                     return Messages::setMessage("error", "Esse produto já existe!");
                 }
+
+                $data["marca"] = strtolower($data["marca"]);
+                $data["serie"] = strtolower($data["serie"]);
+                $data["categoria"] = strtolower($data["categoria"]);
 
                 $image = $_FILES["imagem"]["name"];
                 $extensao = strtolower(pathinfo($image, PATHINFO_EXTENSION));
