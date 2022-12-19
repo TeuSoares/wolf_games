@@ -10,7 +10,6 @@
     use App\Helpers\Crud;
     use App\Helpers\Email;
     use App\Helpers\Messages;
-    use App\Helpers\tokenJWT;
 
     class UserModels {
         private $crud;
