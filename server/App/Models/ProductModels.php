@@ -22,19 +22,14 @@
                 $where = "marca = :marca AND serie = :serie AND quantidade_estoque > 0";
 
                 array_push($values, [":serie", $serie]);
-            }
-
-            if(isset($category) && empty($serie)){
+            }else if(isset($category) && empty($serie)){
                 $where = "marca = :marca AND categoria = :categoria AND quantidade_estoque > 0";
 
                 array_push($values, [":categoria", $category]);
-            }
-
-            if(isset($category) && isset($serie)){
+            }else if(isset($category) && isset($serie)){
                 $where = "marca = :marca AND serie = :serie AND categoria = :categoria AND quantidade_estoque > 0";
 
-                array_push($values, [":serie", $serie]);
-                array_push($values, [":categoria", $category]);
+                array_push($values, [":serie", $serie], [":categoria", $category]);
             }
 
             $data = $crud->select([
