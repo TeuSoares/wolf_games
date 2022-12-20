@@ -122,7 +122,7 @@
                 $random = rand(1000, 9999);
 
                 $newNameImage = "IMG-" . md5($image) . $random . "." . $extensao;
-                $diretorio = __DIR__ . "/../../../public/uploads/";
+                $diretorio = __DIR__ . "/../../../public/server/uploads/";
     
                 $data["imagem"] = $newNameImage;
     

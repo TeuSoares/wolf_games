@@ -103,17 +103,17 @@ const NavbarMobile = () => {
                             )}
                         </li>
                         <li>
-                            <Link to="#">
+                            <Link to="/products/playstation">
                                 PlayStation
                             </Link>
                         </li>
                         <li>
-                            <Link to="#">
+                            <Link to="/products/xbox">
                                 XBox
                             </Link>
                         </li>
                         <li>
-                            <Link to="#">
+                            <Link to="/products/nintendo">
                                 Nintendo
                             </Link>
                         </li>

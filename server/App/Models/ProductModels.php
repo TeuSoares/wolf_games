@@ -34,13 +34,26 @@
 
             $data = $crud->select([
                 "table" => "produtos",
-                "fields" => "id_produto, marca, imagem, nome, preco_unitario",
+                "fields" => "id_produto, marca, categoria, imagem, nome, preco_unitario",
                 "where" => $where,
                 "values" => $values
             ]);
 
+            $series = $crud->select([
+                "table" => "produtos",
+                "fields" => "serie",
+                "where" => "marca = :marca and quantidade_estoque > 0",
+                "others" => "GROUP BY serie",
+                "values" => [
+                    [":marca", $brand]
+                ]
+            ]);
+
             if($data){
-                return $data;
+                return [
+                    "products" => $data,
+                    "series" => $series
+                ];
             }else{
                 return Messages::setMessage("error", "Produtos não encontrados!");
             }

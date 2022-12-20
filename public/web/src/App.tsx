@@ -21,6 +21,8 @@ import Profile from "./pages/Profile";
 import LoginAdmin from "./pages/Admin/Auth/Login";
 import RegisterAdmin from "./pages/Admin/Auth/Register";
 import InsertProducts from "./pages/Admin/InsertProducts";
+import ProductsBrand from "./pages/Products/ProductsBrand";
+import ProductID from "./pages/Products/ProductID";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
               <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
               <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
               <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
+              <Route path="/products/:brand" element={<ProductsBrand />} />
+              <Route path="/products/:brand/:id" element={<ProductID />} />
               <Route path="/admin/login" element={<PrivateAdminFalse children={<LoginAdmin />} />} />
               <Route path="/admin/register" element={<PrivateAdminFalse children={<RegisterAdmin />} />} />
               <Route path="/admin/insertProducts" element={<PrivateAdminTrue children={<InsertProducts />} />} />

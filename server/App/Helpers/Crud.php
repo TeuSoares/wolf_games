@@ -51,7 +51,7 @@
             $others = isset($config["others"]) ? $config['others'] : "";
             $fields = isset($config["fields"]) ? $config['fields'] : "*";
         
-            $query = "SELECT " . $fields . " FROM " . $config['table'] . " " . $join . $where . $others;
+            $query = "SELECT " . $fields . " FROM " . $config['table'] . " " . $join . $where . " " . $others;
         
             $this->execute($query, $config["values"]);
 
