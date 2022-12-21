@@ -44,5 +44,20 @@
 
             return $response->withJson($return);
         }
+
+        public function calculateFrete(Request $request, Response $response){
+            $data = $request->getParsedBody();
+            $category = $request->getAttribute("category");
+
+            $model = $this->model;
+
+            $return = $model->calculateFrete($data, $category);
+
+            if(isset($return["status"]) && $return["status"] == "error"){
+                return $response->withJson($return, 422);
+            }
+
+            return $response->withJson($return);
+        }
     }
 ?>

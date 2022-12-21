@@ -71,7 +71,6 @@ export const Items = styled.div`
     .frete span{
         display: block;
         font-size: .9em;
-        font-weight: bold;
         margin-bottom: 5px;
     }
 
@@ -80,8 +79,20 @@ export const Items = styled.div`
         margin-left: 5px;
     }
 
+    .frete button img{
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+    }
+
     .frete input{
-        padding: .5rem .2rem;
+        width: 120px;
+        padding: .5rem;
+        margin-right: 5px;
+    }
+
+    .frete select{
+        padding: .5rem;
     }
 
     @media (max-width: 640px){

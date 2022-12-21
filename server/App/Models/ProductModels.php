@@ -3,6 +3,7 @@
 
     use App\Helpers\Crud;
     use App\Helpers\Messages;
+    use App\Helpers\Correios;
 
     class ProductModels {
         private $crud;
@@ -77,6 +78,39 @@
             }else{
                 return Messages::setMessage("error", "Produto não encontrado!");
             }
+        }
+
+        public function calculateFrete($data, $category){
+            $service = $data["service"];
+            $destinationCEP = $data["destinationCEP"];
+
+            if($service == "sedex"){
+                $service = "40010";
+            }else if($service == "pac"){
+                $service = "41106";
+            }
+
+            if($category == "console"){
+                $weight = 4.5;
+                $length = 26;
+                $height = 10.4;
+                $width = 39;
+            }else if($category == "game"){
+                $weight = 3.5;
+                $length = 7.9;
+                $height = 27.5;
+                $width = 33.3;
+            }else{
+                $weight = 0;
+                $length = 0;
+                $height = 0;
+                $width = 0;
+            }
+
+           $correios = new Correios($service, "13330670", $destinationCEP, $weight, $length, $height, $width);
+           $response = $correios->calculateFrete();
+
+           return $response;
         }
     }
 ?>
