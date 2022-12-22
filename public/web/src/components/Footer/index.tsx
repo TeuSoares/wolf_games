@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
 
 // Styles
-import { Button, Container } from "../../styles/styles";
+import { Button, Container } from "../../styles/Utils";
 import { 
     Authorial,
     Contents,

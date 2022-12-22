@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./contexts/AuthContext";
 
 // Styles
-import { ContainerApp } from "./styles/styles";
+import { ContainerApp } from "./styles/Utils";
 
 // Components
 import Footer from "./components/Footer";
@@ -23,6 +23,7 @@ import RegisterAdmin from "./pages/Admin/Auth/Register";
 import InsertProducts from "./pages/Admin/InsertProducts";
 import ProductsBrand from "./pages/Products/ProductsBrand";
 import ProductID from "./pages/Products/ProductID";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
               <Route path="/products/:brand" element={<ProductsBrand />} />
               <Route path="/products/:brand/:id" element={<ProductID />} />
+              <Route path="/products/search" element={<Search />} />
               <Route path="/admin/login" element={<PrivateAdminFalse children={<LoginAdmin />} />} />
               <Route path="/admin/register" element={<PrivateAdminFalse children={<RegisterAdmin />} />} />
               <Route path="/admin/insertProducts" element={<PrivateAdminTrue children={<InsertProducts />} />} />

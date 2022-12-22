@@ -21,6 +21,11 @@ interface FormProps {
     width?: string;
 }
 
+interface Title {
+    align?: string;
+    marginTop?: string;
+}
+
 export const ContainerApp = styled.div`
     height: 100vh;
     display: flex;
@@ -81,6 +86,21 @@ export const Message = styled.div`
             background-color: rgb(186, 38, 38, 0.2);
             border: 1px solid #ba2626;
         `};
+`
+
+export const Title = styled.h1`
+    color: #9466ff;
+    margin-top: ${({marginTop}: Title) => marginTop ? marginTop : "4rem"};
+    margin-bottom: 2rem;
+    text-align: ${({align}: Title) => align};
+
+    @media (max-width: 498px) {
+        font-size: 1.5em;
+    }
+
+    @media (max-width: 280px) {
+        font-size: 1.2em;
+    }
 `
 
 export const Form = styled.form`

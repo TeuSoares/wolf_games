@@ -50,10 +50,11 @@
             $join = isset($config["join"]) ? $config['join'] : "";
             $others = isset($config["others"]) ? $config['others'] : "";
             $fields = isset($config["fields"]) ? $config['fields'] : "*";
+            $values = isset($config["values"]) ? $config['values'] : [];
         
             $query = "SELECT " . $fields . " FROM " . $config['table'] . " " . $join . $where . " " . $others;
         
-            $this->execute($query, $config["values"]);
+            $this->execute($query, $values);
 
             return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
         }

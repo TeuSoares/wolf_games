@@ -11,7 +11,7 @@ import {
     Container, 
     Button,
     Form,
-} from "../../../styles/styles";
+} from "../../../styles/Utils";
 import InputAnimated from "../../../components/Layout/Form/Input";
 
 interface DataFormInterface {

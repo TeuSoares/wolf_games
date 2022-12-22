@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 // Hooks
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, FormEvent } from "react";
 
 // Icons
 import { 
@@ -11,17 +11,24 @@ import {
     FaTimes,
 } from "react-icons/fa";
 
+// Contexts
+import { AuthContext } from "../../../contexts/AuthContext";
+
 // Styles
-import { Button, Container } from "../../../styles/styles";
+import { Button, Container } from "../../../styles/Utils";
 import { 
     ContainerMobile,
     Items, 
     Nav,
     ButtonNavMobile,
 } from "./styles";
-import { AuthContext } from "../../../contexts/AuthContext";
 
-const NavbarMobile = () => {
+interface NavbarInterface {
+    handleSearch: (e: FormEvent<HTMLFormElement>) => void;
+    handleChange: React.Dispatch<React.SetStateAction<string | undefined>>
+}
+
+const NavbarMobile = ({handleSearch, handleChange}: NavbarInterface) => {
     const [navActive, setNavActive] = useState<true | false>(false);
 
     const { isAuthenticated } = useContext(AuthContext);
@@ -79,8 +86,8 @@ const NavbarMobile = () => {
                             </Link>
                         </Button>
                     </ButtonNavMobile>
-                    <form>
-                        <input type="text" placeholder="Faça sua pesquisa aqui..." />
+                    <form onSubmit={handleSearch}>
+                        <input type="text" required placeholder="Faça sua pesquisa aqui..." onChange={(e) => handleChange(e.target.value)} />
                         <Button type="submit">
                             <FaSearch />
                         </Button>

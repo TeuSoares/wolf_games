@@ -12,6 +12,44 @@
             $this->crud = new Crud;
         }
 
+        public function home(){
+            $crud = $this->crud;
+
+            $products = $crud->select([
+                "table" => "produtos",
+                "fields" => "id_produto, marca, categoria, imagem, nome, preco_unitario",
+            ]);
+
+            $productsFeatured = $crud->select([
+                "table" => "produtos",
+                "fields" => "id_produto, marca, categoria, imagem, nome, preco_unitario",
+                "others" => "ORDER BY RAND() LIMIT 3"
+            ]);
+
+            return [
+                "products" => $products,
+                "productsFeatured" => $productsFeatured
+            ];
+        }
+
+        public function search($query){
+            $crud = $this->crud;
+
+            $products = $crud->select([
+                "table" => "produtos",
+                "fields" => "*",
+                "where" => "nome LIKE '%$query%' OR serie LIKE '%$query%'",
+                "others" => "LIMIT 10"
+            ]);
+
+            if($products){
+                return $products;
+            }else{
+                return Messages::setMessage("error", "Não foram encontrados produtos, para essa pesquisa!");
+            }
+
+        }
+
         public function getProductByBrandOrCategoryAndSerie($brand, $serie, $category){
             $crud = $this->crud;
 

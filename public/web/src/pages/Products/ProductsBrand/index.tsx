@@ -6,20 +6,15 @@ import imgLoading from "F:/Programação/Desenvolvimento/projetos/wolfGames/clie
 import useMessage from "../../../hooks/useMessage";
 import useQuery from "../../../hooks/useQuery";
 
+// Interfaces
+import { DataProductsInterface } from "../../../interfaces/Products";
+
 // Styles
-import { Container } from "../../../styles/styles"
+import { Container } from "../../../styles/Utils"
 import { HeaderProductsBrand, Items } from "./styles";
 
 // Components
 import ProductCard from "../../../components/ProductCard";
-
-interface DataProductsInterface {
-    id_produto: number;
-    preco_unitario: number;
-    imagem: string;
-    nome: string;
-    categoria: string;
-}
 
 interface SeriesInterface {
     serie: string;

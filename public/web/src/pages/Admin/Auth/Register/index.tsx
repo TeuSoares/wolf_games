@@ -7,7 +7,7 @@ import useQuery from "../../../../hooks/useQuery";
 import useMessage from "../../../../hooks/useMessage";
 
 // Styles
-import { Button, Container, Form } from "../../../../styles/styles";
+import { Button, Container, Form } from "../../../../styles/Utils";
 
 // Components
 import InputAnimated from "../../../../components/Layout/Form/Input";

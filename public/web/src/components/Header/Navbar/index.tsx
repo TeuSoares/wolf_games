@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { useEffect, useContext } from "react";
+import { FormEvent, useContext } from "react";
 
 // Icons
 import { 
@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 
 // Styles
-import { Button, Container } from "../../../styles/styles";
+import { Button, Container } from "../../../styles/Utils";
 import {
     ContainerNavbar,
     Items, 
@@ -19,7 +19,12 @@ import {
 } from "./styles";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-const Navbar = () => {
+interface NavbarInterface {
+    handleSearch: (e: FormEvent<HTMLFormElement>) => void;
+    handleChange: React.Dispatch<React.SetStateAction<string | undefined>>
+}
+
+const Navbar = ({handleSearch, handleChange}: NavbarInterface) => {
     const { isAuthenticated } = useContext(AuthContext);
 
     return ( 
@@ -29,8 +34,8 @@ const Navbar = () => {
                     <Link to="/">
                         <img src="../../../public/logo.png" alt="Logo Wolf Games" />
                     </Link>
-                    <form>
-                        <input type="text" placeholder="Faça sua pesquisa aqui..." />
+                    <form onSubmit={handleSearch}>
+                        <input type="text" required placeholder="Faça sua pesquisa aqui..." onChange={(e) => handleChange(e.target.value)} />
                         <Button type="submit">
                             <FaSearch />
                         </Button>

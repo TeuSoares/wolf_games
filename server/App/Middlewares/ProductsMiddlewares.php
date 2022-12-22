@@ -31,5 +31,21 @@
 
             return Validation::send($errors, $request, $response, $next);
         }
+
+        public function validationFieldSearch(Request $request, Response $response, $next){
+            $query = $request->getQueryParam('query');
+
+            $search = [
+                "pesquisa" => $query
+            ];
+
+            Validation::checkEmptyFields($search);
+
+            Validation::onlyLettersAndNumbers($search);
+
+            $errors = Validation::getErrors();
+
+            return Validation::send($errors, $request, $response, $next);
+        }
     }
 ?>

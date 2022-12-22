@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../styles/styles";
+import { Button } from "../../styles/Utils";
 import { Card, ImageCard, Item } from "./styles";
 
 interface ProductCardInterface {

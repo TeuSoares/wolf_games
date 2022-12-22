@@ -4,7 +4,7 @@ import { useState, useEffect, FormEvent, BaseSyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // Styles
-import { Button, Container, Form } from "../../../styles/styles";
+import { Button, Container, Form } from "../../../styles/Utils";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";

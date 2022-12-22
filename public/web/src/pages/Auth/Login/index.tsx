@@ -19,7 +19,7 @@ import {
     Container, 
     Button,
     Form, 
-} from "../../../styles/styles";
+} from "../../../styles/Utils";
 
 // Components
 import InputAnimated from "../../../components/Layout/Form/Input";

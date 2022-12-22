@@ -13,6 +13,28 @@
             $this->model = new ProductModels;
         }
 
+        public function home(Request $request, Response $response){
+            $model = $this->model;
+
+            $return = $model->home();
+
+            return $response->withJson($return);
+        }
+
+        public function search(Request $request, Response $response){
+            $query = $request->getQueryParam('query');
+
+            $model = $this->model;
+
+            $return = $model->search($query);
+
+            if(isset($return["status"]) && $return["status"] == "error"){
+                return $response->withJson($return, 404);
+            }
+
+            return $response->withJson($return);
+        }
+
         public function getProductByBrandOrCategoryAndSerie(Request $request, Response $response){
             $brand = $request->getAttribute("brand");
 

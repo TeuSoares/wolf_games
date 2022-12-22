@@ -5,7 +5,7 @@ import useMessage from "../../hooks/useMessage";
 import useQuery from "../../hooks/useQuery";
 
 // Styles
-import { Button, Form } from "../../styles/styles";
+import { Button, Form } from "../../styles/Utils";
 import { ContainerProfile, Items, Key, ProfileHeader, Value } from "./styles";
 
 // Components

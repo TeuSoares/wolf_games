@@ -8,7 +8,7 @@ import useQuery from "../../../hooks/useQuery";
 import useChangeInput from "../../../hooks/useChangeInput";
 
 // Styles
-import { Button } from "../../../styles/styles";
+import { Button } from "../../../styles/Utils";
 import { Container, ImageProduct, Items, Description, Box } from "./styles";
 
 interface DataProductInterface {

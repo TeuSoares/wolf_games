@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MessageInterface } from "../interfaces/MessageInterface";
-import { Message } from "../styles/styles";
+import { Message } from "../styles/Utils";
 
 const useMessage = () => {
     const [msg, setMsg] = useState<JSX.Element | undefined>();

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Container } from "../../styles/styles";
+import { Container } from "../../styles/Utils";
 import { Box } from "./styles";
 import { FaSkull } from "react-icons/fa"
 
