@@ -5,21 +5,18 @@ import { Message } from "../styles/Utils";
 
 const useMessage = () => {
     const [msg, setMsg] = useState<JSX.Element | undefined>();
-    const [element, setElement] = useState<JSX.Element | undefined>();
 
     const location = useLocation();
 
-    const handleSetMessage = (msg: MessageInterface) => {
-        setElement(<Message status={msg.status}>{msg.message}</Message>);
+    const handleSetMessage = (msg: MessageInterface, clear: boolean) => {
+        setMsg(<Message status={msg.status}>{msg.message}</Message>);
+
+        if(clear){
+            setTimeout(() => {
+                setMsg(undefined);
+            }, 3000)
+        }
     }
-
-    useEffect(() => {
-        setMsg(element);
-
-        setTimeout(() => {
-            setMsg(undefined);
-        }, 3000)
-    }, [element]);
 
     useEffect(() => {
         if(location.state){

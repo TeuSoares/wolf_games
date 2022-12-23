@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import imgLoading from "F:/Programação/Desenvolvimento/projetos/wolfGames/cliente/public/web/src/assets/loading.svg";
 
 // Hooks
 import { useSearch } from "../../hooks/useSearch";
@@ -16,10 +15,10 @@ import { Container, Title } from "../../styles/Utils";
 // Components
 import ProductCard from "../../components/ProductCard";
 import { Items } from "./styles";
+import Loading from "../../components/Layout/Loading";
 
 const Search = () => {
     const [products, setProducts] = useState<Array<DataProductsInterface>>();
-    const [loading, setLoading] = useState<boolean>(true);
 
     const query = useSearch();
     const search = query.get("query");
@@ -44,11 +43,9 @@ const Search = () => {
             const { status, data } = await handleQuery("GET", `product/search?query=${search}`);
 
             if(status === "success") {
-                setLoading(false);
                 setProducts(data);
             }else if(status === "error"){
-                setLoading(false);
-                handleSetMessage(data);
+                handleSetMessage(data, false);
                 setProducts(undefined);
             }
         }
@@ -58,27 +55,24 @@ const Search = () => {
 
     return ( 
         <Container>
-            <Title marginTop="0">Resultado de: {search}</Title>
-            {!loading ? (
-                <>
-                    {msg && msg}
-                    {products && (
-                        <Items>
-                            {products!.map(item => (
-                                <ProductCard 
-                                    key={item!.id_produto}
-                                    img={item!.imagem} 
-                                    name={item!.nome}
-                                    budge={item!.preco_unitario}
-                                    category={item!.categoria}
-                                    brand={item.marca}
-                                    idProduct={item!.id_produto}
-                                />
-                            ))}
-                        </Items>
-                    )}
-                </>
-            ) : <img src={imgLoading} />}
+            <Title>Resultado de: {search}</Title>
+            {msg || products ? <Loading status={false} /> : <Loading status={true} />}
+            {msg && !products && msg}
+            {products && (
+                <Items>
+                    {products!.map(item => (
+                        <ProductCard 
+                            key={item!.id_produto}
+                            img={item!.imagem} 
+                            name={item!.nome}
+                            budge={item!.preco_unitario}
+                            category={item!.categoria}
+                            brand={item.marca}
+                            idProduct={item!.id_produto}
+                        />
+                    ))}
+                </Items>
+            )}
         </Container>
     );
 }

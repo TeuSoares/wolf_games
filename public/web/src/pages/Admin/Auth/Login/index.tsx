@@ -11,6 +11,7 @@ import { Button, Container, Form } from "../../../../styles/Utils";
 
 // Components
 import InputAnimated from "../../../../components/Layout/Form/Input";
+import Loading from "../../../../components/Layout/Loading";
 
 const LoginAdmin = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +35,7 @@ const LoginAdmin = () => {
             navigate("/admin/insertProducts");
         }else if(status === "error"){
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
         }
     }
 
@@ -67,7 +68,7 @@ const LoginAdmin = () => {
                     </Button>
                 ) : (
                     <Button width="100%" type="submit" disabled>
-                        <img src="src/assets/loading.svg" />
+                        <Loading status button />
                     </Button>
                 )}
                 <span>Novo na equipe?</span>

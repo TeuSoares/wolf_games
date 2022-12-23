@@ -56,7 +56,7 @@ const ProductsBrand = () => {
                 setSeries(data["series"]);
             }else if(status === "error"){
                 setLoading(false);
-                handleSetMessage(data);
+                handleSetMessage(data, false);
                 setProducts(undefined);
             }
         }

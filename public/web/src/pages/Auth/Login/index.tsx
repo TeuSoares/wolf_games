@@ -23,6 +23,7 @@ import {
 
 // Components
 import InputAnimated from "../../../components/Layout/Form/Input";
+import Loading from "../../../components/Layout/Loading";
 
 interface DataFormInterface {
     email: string;
@@ -59,7 +60,7 @@ const Login = () => {
         }else if(status === "error"){
 
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
 
             if(data.message == "Validação"){
                 navigate(`/verifyEmail/${data.values}`, {state: {redirect: "login", status: "success", message: "Insira o código que foi enviado para seu e-mail"}});
@@ -91,7 +92,7 @@ const Login = () => {
                     </Button>
                 ) : (
                     <Button width="100%" type="submit" disabled>
-                        <img src="src/assets/loading.svg" />
+                        <Loading status button />
                     </Button>
                 )}
                 <span>Novo na Wolf Games?</span>

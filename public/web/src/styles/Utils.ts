@@ -23,7 +23,7 @@ interface FormProps {
 
 interface Title {
     align?: string;
-    marginTop?: string;
+    marginTop?: boolean;
 }
 
 export const ContainerApp = styled.div`
@@ -90,7 +90,7 @@ export const Message = styled.div`
 
 export const Title = styled.h1`
     color: #9466ff;
-    margin-top: ${({marginTop}: Title) => marginTop ? marginTop : "4rem"};
+    margin-top: ${({marginTop}: Title) => marginTop && "4rem"};
     margin-bottom: 2rem;
     text-align: ${({align}: Title) => align};
 
@@ -132,12 +132,6 @@ export const Form = styled.form`
         margin-top: 2rem;
         margin-bottom: .6rem;
         color: #fff;
-    }
-
-    img{
-        width: 20px;
-        height: 20px;
-        object-fit: cover;
     }
 
     @media (max-width: 498px) {

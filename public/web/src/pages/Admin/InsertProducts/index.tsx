@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useState, useEffect, FormEvent, BaseSyntheticEvent } from "react";
+import { useState, useEffect, BaseSyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // Styles
@@ -13,6 +13,7 @@ import useChangeInput from "../../../hooks/useChangeInput";
 // Components
 import InputAnimated from "../../../components/Layout/Form/Input";
 import TextAreaAnimated from "../../../components/Layout/Form/TextArea";
+import Loading from "../../../components/Layout/Loading";
 
 interface DataFormInterface {
     nome: string;
@@ -61,7 +62,7 @@ const InsertProducts = () => {
         .then(response => {
             setLoading(false);
             setDataForm(initialValue);
-            handleSetMessage(response.data);
+            handleSetMessage(response.data, true);
         })
         .catch(error => {
             setLoading(false);
@@ -72,7 +73,7 @@ const InsertProducts = () => {
             }
 
             setDataForm(initialValue);
-            handleSetMessage(error.response.data);
+            handleSetMessage(error.response.data, true);
         });
     }
 
@@ -148,7 +149,7 @@ const InsertProducts = () => {
                     </Button>
                 ) : (
                     <Button width="100%" type="submit" disabled>
-                        <img src="src/assets/loading.svg" />
+                        <Loading status button />
                     </Button>
                 )}
                 <br />

@@ -45,7 +45,7 @@ const ProductID = () => {
             if(status === "success") {
                 setProduct(data);
             }else if(status === "error"){
-                handleSetMessage(data);
+                handleSetMessage(data, false);
             }
         }
 
@@ -64,7 +64,7 @@ const ProductID = () => {
             setFrete(data);
         }else if(status === "error"){
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
             console.log(data);
         }
     }

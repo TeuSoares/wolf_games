@@ -13,6 +13,7 @@ import {
     Form,
 } from "../../../styles/Utils";
 import InputAnimated from "../../../components/Layout/Form/Input";
+import Loading from "../../../components/Layout/Loading";
 
 interface DataFormInterface {
     codeInput: string;
@@ -54,7 +55,7 @@ const ValidateEmail = () => {
         }else if(status === "error"){
 
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
 
         }
     }
@@ -76,7 +77,7 @@ const ValidateEmail = () => {
                     </Button>
                 ) : (
                     <Button width="100%" type="submit" disabled>
-                        <img src="src/assets/loading.svg" />
+                        <Loading status button />
                     </Button>
                 )}
                 <span>Já verificou?</span>

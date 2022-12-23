@@ -24,11 +24,12 @@ import {
 } from "./styles";
 
 interface NavbarInterface {
+    state: string;
     handleSearch: (e: FormEvent<HTMLFormElement>) => void;
-    handleChange: React.Dispatch<React.SetStateAction<string | undefined>>
+    handleChange: React.Dispatch<React.SetStateAction<string>>
 }
 
-const NavbarMobile = ({handleSearch, handleChange}: NavbarInterface) => {
+const NavbarMobile = ({state, handleSearch, handleChange}: NavbarInterface) => {
     const [navActive, setNavActive] = useState<true | false>(false);
 
     const { isAuthenticated } = useContext(AuthContext);

@@ -59,7 +59,7 @@ const Profile = () => {
                 
             }else if(status === "error"){
                 setLoading(false);
-                handleSetMessage(data);
+                handleSetMessage(data, false);
             }
         }
 
@@ -79,11 +79,11 @@ const Profile = () => {
 
         if(status === "success") {
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
             setFormUpdate(false);
         }else if(status === "error"){
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
         }
     }
 

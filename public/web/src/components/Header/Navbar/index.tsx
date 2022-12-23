@@ -20,11 +20,12 @@ import {
 import { AuthContext } from "../../../contexts/AuthContext";
 
 interface NavbarInterface {
+    state: string;
     handleSearch: (e: FormEvent<HTMLFormElement>) => void;
-    handleChange: React.Dispatch<React.SetStateAction<string | undefined>>
+    handleChange: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Navbar = ({handleSearch, handleChange}: NavbarInterface) => {
+const Navbar = ({state, handleSearch, handleChange}: NavbarInterface) => {
     const { isAuthenticated } = useContext(AuthContext);
 
     return ( 
@@ -35,7 +36,13 @@ const Navbar = ({handleSearch, handleChange}: NavbarInterface) => {
                         <img src="../../../public/logo.png" alt="Logo Wolf Games" />
                     </Link>
                     <form onSubmit={handleSearch}>
-                        <input type="text" required placeholder="Faça sua pesquisa aqui..." onChange={(e) => handleChange(e.target.value)} />
+                        <input 
+                            type="text" 
+                            required 
+                            placeholder="Faça sua pesquisa aqui..." 
+                            onChange={(e) => handleChange(e.target.value)} 
+                            value={state}
+                        />
                         <Button type="submit">
                             <FaSearch />
                         </Button>

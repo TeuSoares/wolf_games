@@ -15,6 +15,7 @@ import {
 
 // Components
 import InputAnimated from "../../../components/Layout/Form/Input";
+import Loading from "../../../components/Layout/Loading";
 
 interface DataFormInterface {
     nome: string;
@@ -51,7 +52,7 @@ const Register = () => {
         }else if(status === "error"){
 
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
 
         }
     }
@@ -104,7 +105,7 @@ const Register = () => {
                     </Button>
                 ) : (
                     <Button width="100%" type="submit" disabled>
-                        <img src="src/assets/loading.svg" />
+                        <Loading status button />
                     </Button>
                 )}
                 <span>Já possui cadastro?</span>

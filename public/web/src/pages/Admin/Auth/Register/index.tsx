@@ -11,6 +11,7 @@ import { Button, Container, Form } from "../../../../styles/Utils";
 
 // Components
 import InputAnimated from "../../../../components/Layout/Form/Input";
+import Loading from "../../../../components/Layout/Loading";
 
 const RegisterAdmin = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -33,7 +34,7 @@ const RegisterAdmin = () => {
             navigate("/admin/login", {state: data});
         }else if(status === "error"){
             setLoading(false);
-            handleSetMessage(data);
+            handleSetMessage(data, true);
         }
     }
 
@@ -84,7 +85,7 @@ const RegisterAdmin = () => {
                     </Button>
                 ) : (
                     <Button width="100%" type="submit" disabled>
-                        <img src="src/assets/loading.svg" />
+                        <Loading status button />
                     </Button>
                 )}
                 <span>Já possui login?</span>
