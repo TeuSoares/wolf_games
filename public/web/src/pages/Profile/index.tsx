@@ -10,6 +10,7 @@ import { ContainerProfile, Items, Key, ProfileHeader, Value } from "./styles";
 
 // Components
 import InputAnimated from "../../components/Layout/Form/Input";
+import Loading from "../../components/Layout/Loading";
 
 interface DataFormInterface {
     nome: string;
@@ -33,13 +34,11 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
+            setDataForm(undefined);
 
             const { status, data } = await handleQuery("GET", "users/profile", {}, "protected");
 
             if(status === "success") {
-                setLoading(false);
-
                 if(!formUpdate){
                     const celular = data[0].celular;
                     const cpf = data[0].cpf;
@@ -58,8 +57,7 @@ const Profile = () => {
                 setDataForm(data[0]);
                 
             }else if(status === "error"){
-                setLoading(false);
-                handleSetMessage(data, false);
+                handleSetMessage(data, true);
             }
         }
 
@@ -102,7 +100,7 @@ const Profile = () => {
                 )}
             </ProfileHeader>
             {msg && msg}
-            {loading && <img src="src/assets/loading.svg" />}
+            {msg || values ? <Loading status={false} /> : <Loading status={true} />}
             {!formUpdate ? (
                 <>
                     {values && (
@@ -120,7 +118,7 @@ const Profile = () => {
                 </>
             ) : (
                 <>
-                    {!loading && (
+                    {values && (
                         <Form width="100%" onSubmit={handleSubmit}>
                             <InputAnimated 
                                 type="text" 

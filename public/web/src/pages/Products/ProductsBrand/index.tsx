@@ -1,6 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import imgLoading from "F:/Programação/Desenvolvimento/projetos/wolfGames/cliente/public/web/src/assets/loading.svg";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";
@@ -10,20 +9,21 @@ import useQuery from "../../../hooks/useQuery";
 import { DataProductsInterface } from "../../../interfaces/Products";
 
 // Styles
-import { Container } from "../../../styles/Utils"
+import { Button, Container, Title } from "../../../styles/Utils"
 import { HeaderProductsBrand, Items } from "./styles";
 
 // Components
 import ProductCard from "../../../components/ProductCard";
+import Loading from "../../../components/Layout/Loading";
 
 interface SeriesInterface {
     serie: string;
 }
 
 const ProductsBrand = () => {
-    const [products, setProducts] = useState<Array<DataProductsInterface>>();
+    const [products, setProducts] = useState<Array<DataProductsInterface> | undefined>();
     const [series, setSeries] = useState<Array<SeriesInterface>>();
-    const [loading, setLoading] = useState<boolean>(true);
+    const [filter, setFilter] = useState<boolean>(false);
 
     const [serie, setSerie] = useState<string>(""); 
     const [category, setCategory] = useState<string>(""); 
@@ -38,7 +38,9 @@ const ProductsBrand = () => {
         const getProducts = async () => {
             let url = `product/${brand}`;
 
-            if(serie != "default" && category != "default") {
+            setProducts(undefined);
+
+            if(serie || category) {
                 if(serie && !category){
                     url = `product/${brand}?serie=${serie}`
                 }else if(!serie && category){
@@ -46,40 +48,39 @@ const ProductsBrand = () => {
                 }else if(serie && category){
                     url = `product/${brand}?serie=${serie}&category=${category}`
                 }
+
+                setCategory("");
+                setSerie("");
             }
 
             const { status, data } = await handleQuery("GET", url);
 
             if(status === "success") {
-                setLoading(false);
                 setProducts(data["products"]);
                 setSeries(data["series"]);
             }else if(status === "error"){
-                setLoading(false);
                 handleSetMessage(data, false);
                 setProducts(undefined);
             }
         }
 
         getProducts();
-    }, [brand, series, category]);
+    }, [brand, filter]);
 
-    const handleChangeSerie = (e: ChangeEvent<HTMLSelectElement>) => {
-        setSerie(e.target.value);
-    }
-
-    const handleChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
-        setCategory(e.target.value);
+    const handleFilter = () => {
+        if(serie || category){
+            setFilter(!filter);
+        }
     }
 
     return ( 
         <Container displayFlex flexDirection="column" alignItems="center">
             <HeaderProductsBrand>
-                <h1>Marca: {brand}</h1>
+                <Title>Marca: {brand}</Title>
                 <div>
-                    <select name="serie" onChange={handleChangeSerie}>
+                    <select name="serie" onChange={(e) => setSerie(e.target.value)}>
                         <option value="default">Escolha uma série</option>
-                        {!loading && (
+                        {products && (
                             <>
                                 {series!.map((item) => (
                                     <option key={item.serie} value={item.serie}>{item.serie}</option>
@@ -87,33 +88,35 @@ const ProductsBrand = () => {
                             </>
                         )}
                     </select>
-                    <select name="category" onChange={handleChangeCategory}>
+                    <select name="category" onChange={(e) => setCategory(e.target.value)}>
                         <option value="default">Escolha uma categoria</option>
-                        <option value="console">Consoles</option>
-                        <option value="game">Games</option>
+                        {products && (
+                            <>
+                                <option value="console">Consoles</option>
+                                <option value="game">Games</option>
+                            </>
+                        )}
                     </select>
+                    {products ? <Button type="button" onClick={handleFilter}>Pesquisar</Button> : <Button type="button" disabled>Pesquisar</Button>}
                 </div>
             </HeaderProductsBrand>
-            {msg && msg}
-            {!loading ? (
-                <>
-                    {products && (
-                        <Items>
-                            {products!.map(item => (
-                                <ProductCard 
-                                    key={item!.id_produto}
-                                    img={item!.imagem} 
-                                    name={item!.nome}
-                                    budge={item!.preco_unitario}
-                                    category={item!.categoria}
-                                    brand={brand!}
-                                    idProduct={item!.id_produto}
-                                />
-                            ))}
-                        </Items>
-                    )}
-                </>
-            ) : <img src={imgLoading} />}
+            {msg || products ? <Loading status={false} /> : <Loading status={true} />}
+            {msg && !products && msg}
+            {products && (
+                <Items>
+                    {products.map(item => (
+                        <ProductCard 
+                            key={item!.id_produto}
+                            img={item!.imagem} 
+                            name={item!.nome}
+                            budge={item!.preco_unitario}
+                            category={item!.categoria}
+                            brand={brand!}
+                            idProduct={item!.id_produto}
+                        />
+                    ))}
+                </Items>
+            )}
         </Container>
     );
 }

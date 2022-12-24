@@ -25,19 +25,21 @@ export const ImageCard = styled.div`
 `
 
 export const Item = styled.div`
+    height: 300px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 2rem 1.5rem;
     background-color: #313132;
 
     h3{
         color: #fff;
-        margin-bottom: 2.5rem;
-        font-size: 1.1em;
+        margin-bottom: 2.2rem;
+        font-size: 1em;
     }
 
     span{
-        margin-bottom: 1.5rem; 
+        margin-bottom: 1.2rem; 
     }
 
     .category{

@@ -4,12 +4,6 @@ export const HeaderProductsBrand = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
-
-    h1{
-        color: #9466ff;
-        text-align: center;
-    }
 
     select{
         padding: .8rem 1.2rem;
@@ -25,22 +19,23 @@ export const HeaderProductsBrand = styled.div`
         color: #000;
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 850px) {
         flex-direction: column;
+        align-items: center;
 
         h1{
-            font-size: 1.2em;
+            text-align: center;
         }
     }
 
-    @media (max-width: 410px) {
+    @media (max-width: 438px) {
         select, button{
             width: 100%;
             margin-top: 1rem;
         }
     }
 
-    @media (min-width: 411px) and (max-width: 820px) {
+    @media (min-width: 440px) and (max-width: 820px) {
         select, button{
             margin-top: 1rem;
         }

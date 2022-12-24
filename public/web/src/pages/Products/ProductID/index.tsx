@@ -1,6 +1,5 @@
 import { useEffect, useState, FormEvent } from "react";
 import { useParams } from "react-router-dom";
-import imgLoading from "F:/Programação/Desenvolvimento/projetos/wolfGames/cliente/public/web/src/assets/loading.svg";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";
@@ -9,7 +8,10 @@ import useChangeInput from "../../../hooks/useChangeInput";
 
 // Styles
 import { Button } from "../../../styles/Utils";
-import { Container, ImageProduct, Items, Description, Box } from "./styles";
+import { Container, ImageProduct, Items, Description, Box, Info, Budge, Frete } from "./styles";
+
+// Components
+import Loading from "../../../components/Layout/Loading";
 
 interface DataProductInterface {
     id_produto: number;
@@ -25,7 +27,6 @@ interface DataProductInterface {
 
 const ProductID = () => {
     const [product, setProduct] = useState<Array<DataProductInterface>>();
-    const [loading, setLoading] = useState<boolean>(false);
 
     const [frete, setFrete] = useState<{value: string; deadline: string}>();
     const [category, setCategory] = useState<string>();
@@ -55,24 +56,20 @@ const ProductID = () => {
     const handleCalculateFrete = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        setLoading(true);
-
         const { status, data } = await handleQuery("POST", `product/frete/${category}`, dataForm);
 
         if(status === "success") {
-            setLoading(false);
             setFrete(data);
         }else if(status === "error"){
-            setLoading(false);
             handleSetMessage(data, true);
-            console.log(data);
         }
     }
 
     return ( 
         <Container>
             {msg && msg}
-            {product ? (
+            {msg || product ? <Loading status={false} /> : <Loading status={true} />}
+            {product && (
                 <>
                     {product.map(item => (
                         <Box key={item.id_produto}>
@@ -81,16 +78,16 @@ const ProductID = () => {
                             </ImageProduct>
                             <Items>
                                 <h3>{item.nome}</h3>
-                                <div className="info">
+                                <Info>
                                     <span><strong>Código:</strong> {item.id_produto}</span>
                                     <span><strong>Estoque:</strong> {item.quantidade_estoque}</span> 
                                     <span><strong>Marca:</strong> {item.marca}</span> 
                                     <span><strong>Série:</strong> {item.serie}</span> 
-                                </div>
-                                <div className="budge">
+                                </Info>
+                                <Budge>
                                     <span>R$ {item.preco_unitario}</span>
-                                </div>
-                                <div className="frete">
+                                </Budge>
+                                <Frete>
                                     <span><strong>Calcular o frete</strong></span>
                                     <form onSubmit={handleCalculateFrete}>
                                         <input type="text" name="destinationCEP" placeholder="CEP" required onChange={handleChange} />
@@ -99,15 +96,7 @@ const ProductID = () => {
                                             <option value="sedex">SEDEX</option>
                                             <option value="pac">PAC</option>
                                         </select>
-                                        {!loading ? (
-                                            <Button type="submit" onClick={() => setCategory(item.categoria)}>
-                                                OK
-                                            </Button>
-                                        ) : (
-                                            <Button type="submit" disabled>
-                                                <img className="loading" src={imgLoading} />
-                                            </Button>
-                                        )}
+                                        <Button type="submit" onClick={() => setCategory(item.categoria)}>OK</Button>
                                     </form>
                                     {frete && (
                                        <>   
@@ -116,8 +105,8 @@ const ProductID = () => {
                                             <span><strong>Prazo de entrega:</strong> {frete.deadline[0]} dias</span>
                                        </>
                                     )}
-                                </div>
-                                <Button width="50%" type="button">Adicionar ao carrinho</Button>
+                                </Frete>
+                                <Button className="btn-addCard" type="button">Adicionar ao carrinho</Button>
                             </Items>
                             <Description>
                                 <h3>Descrição do produto</h3>
@@ -126,7 +115,7 @@ const ProductID = () => {
                         </Box>
                     ))}
                 </>
-            ) : <img className="loading" src={imgLoading} />}
+            )}
         </Container>
     );
 }
