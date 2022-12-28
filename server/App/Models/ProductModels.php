@@ -118,8 +118,9 @@
             }
         }
 
-        public function calculateFrete($data, $category){
+        public function calculateFrete($data){
             $service = $data["service"];
+            $qtd = $data["qtd"];
             $destinationCEP = $data["destinationCEP"];
 
             if($service == "sedex"){
@@ -128,16 +129,21 @@
                 $service = "41106";
             }
 
-            if($category == "console"){
-                $weight = 4.5;
-                $length = 26;
-                $height = 10.4;
-                $width = 39;
-            }else if($category == "game"){
-                $weight = 3.5;
-                $length = 7.9;
-                $height = 27.5;
-                $width = 33.3;
+            if($qtd <= 3){
+                $weight = 8;
+                $length = 32;
+                $height = 12;
+                $width = 24;
+            }else if($qtd > 3 && $qtd <= 7){
+                $weight = 12;
+                $length = 32;
+                $height = 16;
+                $width = 24;
+            }else if($qtd > 7 && $qtd <= 10){
+                $weight = 15;
+                $length = 32;
+                $height = 20;
+                $width = 24;
             }else{
                 $weight = 0;
                 $length = 0;

@@ -8,8 +8,8 @@ const useMessage = () => {
 
     const location = useLocation();
 
-    const handleSetMessage = (msg: MessageInterface, clear: boolean) => {
-        setMsg(<Message status={msg.status}>{msg.message}</Message>);
+    const handleSetMessage = (msg: MessageInterface, clear: boolean, reset?: boolean) => {
+        setMsg(<Message reset={reset} status={msg.status}>{msg.message}</Message>);
 
         if(clear){
             setTimeout(() => {

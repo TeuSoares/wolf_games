@@ -11,6 +11,6 @@
 
     $this->get("/{brand}/{id}", ProductControllers::class . ":getProductById");
 
-    $this->post("/frete/{category}", ProductControllers::class . ":calculateFrete")
+    $this->post("/frete", ProductControllers::class . ":calculateFrete")
     ->add(ProductsMiddlewares::class . ":validationFieldsFrete");
 ?>

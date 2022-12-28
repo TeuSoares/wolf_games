@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState, useEffect } from "react";
 
 // Icons
 import { 
@@ -17,7 +17,10 @@ import {
     Nav,
     LinksHeader,
 } from "./styles";
+
+// Context
 import { AuthContext } from "../../../contexts/AuthContext";
+import { AddCarContext } from "../../../contexts/AddCarContext";
 
 interface NavbarInterface {
     state: string;
@@ -27,6 +30,21 @@ interface NavbarInterface {
 
 const Navbar = ({state, handleSearch, handleChange}: NavbarInterface) => {
     const { isAuthenticated } = useContext(AuthContext);
+    const { changeAddCar } = useContext(AddCarContext);
+
+    const [productsCar, setProductsCar] = useState(0);
+
+    useEffect(() => {
+        const car = sessionStorage.getItem("car");
+
+        if(car){
+            const products = JSON.parse(car);
+
+            const qtd = products.length;
+
+            setProductsCar(qtd);
+        }
+    }, [changeAddCar]);
 
     return ( 
         <ContainerNavbar>
@@ -60,8 +78,8 @@ const Navbar = ({state, handleSearch, handleChange}: NavbarInterface) => {
                             )}
                         </div>
                         <div>
-                            <Link to="#">
-                                <FaShoppingCart /> 0 itens
+                            <Link to="/cart">
+                                <FaShoppingCart /> {productsCar} itens
                             </Link>
                         </div>
                     </LinksHeader>

@@ -15,6 +15,7 @@ interface ButtonProps {
 
 interface MessageProps {
     status: string;
+    reset?: boolean;
 }
 
 interface FormProps {
@@ -69,7 +70,7 @@ export const Button = styled.button`
 
 export const Message = styled.div`
     width: 100%;
-    margin-bottom: 1.4rem;
+    margin-bottom: ${({reset}: MessageProps) => reset ? "0" : "1.4rem"};
     padding: 1rem .7rem;
     border-radius: 5px;
     color: #fff;

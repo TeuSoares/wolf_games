@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Contexts
 import { AuthContextProvider } from "./contexts/AuthContext";
+import { AddCarProvider } from "./contexts/AddCarContext";
 
 // Styles
 import { ContainerApp } from "./styles/Utils";
@@ -24,29 +25,33 @@ import InsertProducts from "./pages/Admin/InsertProducts";
 import ProductsBrand from "./pages/Products/ProductsBrand";
 import ProductID from "./pages/Products/ProductID";
 import Search from "./pages/Search";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
     <Router>
       <AuthContextProvider>
         <ContainerApp>
-          <Header />
-          <main >
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<PrivateUserFalse children={<Login />} />} />
-              <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
-              <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
-              <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
-              <Route path="/products/:brand" element={<ProductsBrand />} />
-              <Route path="/products/:brand/:id" element={<ProductID />} />
-              <Route path="/products/search" element={<Search />} />
-              <Route path="/admin/login" element={<PrivateAdminFalse children={<LoginAdmin />} />} />
-              <Route path="/admin/register" element={<PrivateAdminFalse children={<RegisterAdmin />} />} />
-              <Route path="/admin/insertProducts" element={<PrivateAdminTrue children={<InsertProducts />} />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
+          <AddCarProvider>
+            <Header />
+            <main >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<PrivateUserFalse children={<Login />} />} />
+                <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
+                <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
+                <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
+                <Route path="/products/:brand" element={<ProductsBrand />} />
+                <Route path="/products/:brand/:id" element={<ProductID />} />
+                <Route path="/products/search" element={<Search />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/admin/login" element={<PrivateAdminFalse children={<LoginAdmin />} />} />
+                <Route path="/admin/register" element={<PrivateAdminFalse children={<RegisterAdmin />} />} />
+                <Route path="/admin/insertProducts" element={<PrivateAdminTrue children={<InsertProducts />} />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </AddCarProvider>
           <Footer />
         </ContainerApp>
       </AuthContextProvider>

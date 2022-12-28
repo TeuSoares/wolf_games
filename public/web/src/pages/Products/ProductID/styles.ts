@@ -89,39 +89,6 @@ export const Budge = styled.div`
     }
 `
 
-export const Frete = styled.div`
-    margin-bottom: 1.2rem;
-
-    span{
-        display: block;
-        font-size: .9em;
-        margin-bottom: 5px;
-    }
-
-    button{
-        font-size: .7em;
-        margin-left: 5px;
-    }
-
-    input{
-        width: 120px;
-        padding: .5rem;
-        margin-right: 5px;
-    }
-
-    select{
-        padding: .5rem;
-    }
-
-    @media (max-width: 325px){
-        select, button, input{
-            width: 100%;
-            margin-top: 8px;
-            margin-left: 0;
-        }
-    }
-`
-
 export const Description = styled.div`
     width: 100%;
     padding: 1.7rem 2rem;

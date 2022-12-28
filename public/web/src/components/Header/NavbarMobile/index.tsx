@@ -82,7 +82,7 @@ const NavbarMobile = ({state, handleSearch, handleChange}: NavbarInterface) => {
                             <img src="../../../public/logo.png" alt="Logo Wolf Games" />
                         </Link>
                         <Button type="button">
-                            <Link to="#">
+                            <Link to="/cart">
                                 <FaShoppingCart />
                             </Link>
                         </Button>

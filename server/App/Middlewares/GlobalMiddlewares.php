@@ -4,7 +4,7 @@
 
     $app->add(new Tuupola\Middleware\JwtAuthentication([
         "path" => ["/api/users/", "/api/purchase/"],
-        "ignore" => ["/api/users/register", "/api/users/login", "/api/users/verificationEmail"],
+        "ignore" => ["/api/users/register", "/api/users/login", "/api/users/verificationEmail", "/api/purchase/cart"],
         "secret" => $_ENV['SECRET_KEY'],
         "error" => function ($response) {
             return $response->withJson([

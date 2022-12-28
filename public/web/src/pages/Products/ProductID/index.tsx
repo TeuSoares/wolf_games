@@ -1,17 +1,17 @@
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // Hooks
 import useMessage from "../../../hooks/useMessage";
 import useQuery from "../../../hooks/useQuery";
-import useChangeInput from "../../../hooks/useChangeInput";
 
 // Styles
-import { Button } from "../../../styles/Utils";
-import { Container, ImageProduct, Items, Description, Box, Info, Budge, Frete } from "./styles";
+import { Container, ImageProduct, Items, Description, Box, Info, Budge } from "./styles";
 
 // Components
 import Loading from "../../../components/Layout/Loading";
+import AddCart from "../../../components/AddCart";
+import CalculateFrete from "../../../components/CalculateFrete";
 
 interface DataProductInterface {
     id_produto: number;
@@ -28,16 +28,11 @@ interface DataProductInterface {
 const ProductID = () => {
     const [product, setProduct] = useState<Array<DataProductInterface>>();
 
-    const [frete, setFrete] = useState<{value: string; deadline: string}>();
-    const [category, setCategory] = useState<string>();
-
     const { msg, handleSetMessage } = useMessage();
 
     const handleQuery = useQuery();
 
     const { brand, id } = useParams();
-
-    const { dataForm, handleChange } = useChangeInput();
 
     useEffect(() => {
         const getProduct = async () => {
@@ -52,18 +47,6 @@ const ProductID = () => {
 
         getProduct();
     }, []);
-
-    const handleCalculateFrete = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const { status, data } = await handleQuery("POST", `product/frete/${category}`, dataForm);
-
-        if(status === "success") {
-            setFrete(data);
-        }else if(status === "error"){
-            handleSetMessage(data, true);
-        }
-    }
 
     return ( 
         <Container>
@@ -87,26 +70,9 @@ const ProductID = () => {
                                 <Budge>
                                     <span>R$ {item.preco_unitario}</span>
                                 </Budge>
-                                <Frete>
-                                    <span><strong>Calcular o frete</strong></span>
-                                    <form onSubmit={handleCalculateFrete}>
-                                        <input type="text" name="destinationCEP" placeholder="CEP" required onChange={handleChange} />
-                                        <select name="service" required onChange={handleChange}>
-                                            <option value=""></option>
-                                            <option value="sedex">SEDEX</option>
-                                            <option value="pac">PAC</option>
-                                        </select>
-                                        <Button type="submit" onClick={() => setCategory(item.categoria)}>OK</Button>
-                                    </form>
-                                    {frete && (
-                                       <>   
-                                            <br />
-                                            <span><strong>Valor:</strong> R$ {frete!.value[0]}</span>
-                                            <span><strong>Prazo de entrega:</strong> {frete.deadline[0]} dias</span>
-                                       </>
-                                    )}
-                                </Frete>
-                                <Button className="btn-addCard" type="button">Adicionar ao carrinho</Button>
+                                <CalculateFrete qtd={1} responsive />
+                                <br />
+                                <AddCart className="btn-addCard" idProduct={item.id_produto} />
                             </Items>
                             <Description>
                                 <h3>Descrição do produto</h3>

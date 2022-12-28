@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button } from "../../styles/Utils";
+import AddCart from "../AddCart";
 import { Card, ImageCard, Item } from "./styles";
 
 interface ProductCardInterface {
@@ -25,7 +25,7 @@ const ProductCard = ({img, name, category, budge, brand, idProduct}: ProductCard
                 </Link>
                 <span className="category">{category}</span>
                 <span className="budge">R$ {budge}</span>
-                <Button type="button">Adicionar ao carrinho</Button>
+                <AddCart idProduct={idProduct} />
             </Item>
         </Card>
     );
