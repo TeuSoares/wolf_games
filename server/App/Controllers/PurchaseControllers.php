@@ -26,5 +26,79 @@
 
             return $response->withJson($return);
         }
+
+        public function registerResquest(Request $request, Response $response){
+            $data = $request->getParsedBody();
+            $token = $request->getAttribute("token");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->registerResquest($data, $id_cliente);
+
+            return $response->withJson($return, 201);
+        }
+
+        public function deliveryAddress(Request $request, Response $response){
+            $data = $request->getParsedBody();
+            $token = $request->getAttribute("token");
+            $id_pedido = $request->getAttribute("id_pedido");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->deliveryAddress($data, $id_cliente, $id_pedido);
+
+            return $response->withJson($return, 201);
+        }
+
+        public function checkIfAddressItsFull(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+            $id_pedido = $request->getAttribute("id_pedido");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->checkIfAddressItsFull($id_cliente, $id_pedido);
+
+            if(isset($return["status"]) && $return["status"] === "error"){
+                return $response->withJson($return, 422);
+            }
+
+            return $response->withJson($return);
+        }
+
+        public function reviewRequest(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+            $id_pedido = $request->getAttribute("id_pedido");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->reviewRequest($id_cliente, $id_pedido);
+
+            if(isset($return["status"]) && $return["status"] === "error"){
+                return $response->withJson($return, 404);
+            }
+
+            return $response->withJson($return);
+        }
+
+        public function deleteRequest(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+            $id_pedido = $request->getAttribute("id_pedido");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->deleteRequest($id_cliente, $id_pedido);
+
+            return $response->withJson($return);
+        }
     }
 ?>
