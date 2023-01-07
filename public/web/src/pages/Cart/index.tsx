@@ -1,7 +1,7 @@
 // Utils
 import React, { useState, useEffect } from "react";
 import { FaTrashAlt, FaPlus, FaMinus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Hooks
 import useQuery from "../../hooks/useQuery";
@@ -29,6 +29,8 @@ const Cart = () => {
 
     const { msg, handleSetMessage } = useMessage();
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if(productsSession){
             sessionStorage.setItem("car", JSON.stringify(productsSession));
@@ -43,13 +45,15 @@ const Cart = () => {
 
         let productsQuery: string = "";
 
-        if(initialValue.length > 0){
-            for (const product of initialValue) {
-                const values: any = Object.values(product);
-                productsQuery += values[0] + ",";
+        if(initialValue){
+            if(initialValue.length > 0){
+                for (const product of initialValue) {
+                    const values: any = Object.values(product);
+                    productsQuery += values[0] + ",";
+                }
+        
+                productsQuery = productsQuery.slice(0, -1);
             }
-    
-            productsQuery = productsQuery.slice(0, -1);
         }else{
             productsQuery = "0";
         }
@@ -60,7 +64,7 @@ const Cart = () => {
             if(status === "success") {
                 setProducts(data);
             }else if(status === "error"){
-                handleSetMessage(data, false);
+                handleSetMessage(data, true);
                 setProducts(undefined);
             }
         }
@@ -115,15 +119,47 @@ const Cart = () => {
         setStatusDelete(!statusDelete);
     };
 
+    const handleInsertProductsOfCart = async () => {
+        const valuesOfProducts = [];
+
+        for(const valueProducts of products!) {
+            for(const valueSession of productsSession!){
+                if(valueProducts.id_produto === valueSession.idProduct){
+                    const obj = {
+                        ...valueSession,
+                        subtotal: parseFloat(valueProducts.preco_unitario) * valueSession.qtd
+                    }
+
+                    valuesOfProducts.push(obj);
+                }
+            }
+        }
+
+        const values = {
+            info: {
+                quantidade: productsSession!.length,
+                valor_pedido: total
+            },
+            products: valuesOfProducts
+        }
+
+        const { status, data } = await handleQuery("POST", "purchase/registerResquest", values, "protected");
+
+        if(status === "success") {
+            sessionStorage.removeItem("car");
+            navigate(`/purchase/address/${data.id_pedido}?qtd=${productsSession!.length}`, {state: {redirect: "cart"}});
+        }else if(status === "error"){
+            handleSetMessage(data, true);
+        }
+    }
+
     return ( 
         <Container>
             <HeaderCart>
                 <Title>Carrinho</Title>
-                <Link to="/purchase">
-                    <Button type="button">Finalizar compra</Button>
-                </Link>
+                <Button type="button" onClick={handleInsertProductsOfCart}>Finalizar compra</Button>
             </HeaderCart>
-            {msg && !products && msg}
+            {msg && msg}
             {msg || products ? <Loading status={false} /> : <Loading status={true} />}
             {products && (
                 <Box>

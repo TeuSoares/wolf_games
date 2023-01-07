@@ -26,6 +26,10 @@ import ProductsBrand from "./pages/Products/ProductsBrand";
 import ProductID from "./pages/Products/ProductID";
 import Search from "./pages/Search";
 import Cart from "./pages/Cart";
+import Address from "./pages/Purchase/Address";
+import Review from "./pages/Purchase/Review";
+import Checkout from "./pages/Purchase/Checkout";
+import PaymentStatus from "./pages/Purchase/PaymentStatus";
 
 function App() {
   return (
@@ -45,6 +49,10 @@ function App() {
                 <Route path="/products/:brand/:id" element={<ProductID />} />
                 <Route path="/products/search" element={<Search />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/purchase/address/:id_pedido" element={<Address />} />
+                <Route path="/purchase/review/:id_pedido" element={<Review />} />
+                <Route path="/purchase/checkout" element={<Checkout />} />
+                <Route path="/order/:id_pedido/complete" element={<PaymentStatus />} />
                 <Route path="/admin/login" element={<PrivateAdminFalse children={<LoginAdmin />} />} />
                 <Route path="/admin/register" element={<PrivateAdminFalse children={<RegisterAdmin />} />} />
                 <Route path="/admin/insertProducts" element={<PrivateAdminTrue children={<InsertProducts />} />} />

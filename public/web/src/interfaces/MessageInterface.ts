@@ -1,4 +1,4 @@
 export interface MessageInterface {
     status: string;
-    message: string;
+    message: string | undefined;
 }

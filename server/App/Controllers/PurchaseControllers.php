@@ -100,5 +100,38 @@
 
             return $response->withJson($return);
         }
+
+        public function checkout(Request $request, Response $response){
+            $data = $request->getParsedBody();
+            $token = $request->getAttribute("token");
+
+            $amount = $data['amount'];
+            $id_pedido = $data['id_pedido'];
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->checkout($amount, $id_cliente, $id_pedido);
+
+            if(isset($return["status"]) && $return["status"] === "error"){
+                return $response->withJson($return, 500);
+            }
+
+            return $response->withJson($return);
+        }
+
+        public function paymentSucceeded(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+            $id_pedido = $request->getAttribute("id_pedido");
+
+            $id_cliente = $token['id'];
+
+            $model = $this->model;
+
+            $return = $model->paymentSucceeded($id_cliente, $id_pedido);
+
+            return $response->withJson($return);
+        }
     }
 ?>

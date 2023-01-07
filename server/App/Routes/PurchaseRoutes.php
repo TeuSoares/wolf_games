@@ -14,4 +14,8 @@
     $this->get("/review/{id_pedido}", PurchaseControllers::class . ":reviewRequest");
 
     $this->delete("/delete/{id_pedido}", PurchaseControllers::class . ":deleteRequest");
+
+    $this->post("/checkout", PurchaseControllers::class . ":checkout");
+
+    $this->patch("/paymentSucceeded/{id_pedido}", PurchaseControllers::class . ":paymentSucceeded");
 ?>
