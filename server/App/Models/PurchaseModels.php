@@ -219,23 +219,5 @@
                 return Messages::setMessage("error", "Houve um problema no servidor!. Tente novamente mais tarde.");
             }
         }
-
-        public function paymentSucceeded($id_cliente, $id_pedido){
-            $crud = $this->crud;
-
-            $crud->update([
-                "table" => "pedidos",
-                "fields" => "status_pedido = 'a caminho'",
-                "where" => "fk_id_cliente = :id_cliente and id_pedido = :id_pedido",
-                "values" => [
-                    [":id_cliente", $id_cliente],
-                    [":id_pedido", $id_pedido]
-                ]
-            ]);
-
-            return [
-                "response" => true
-            ];
-        }
     }
 ?>

@@ -1,8 +1,13 @@
 <?php
     require_once __DIR__ . "/../vendor/autoload.php";
 
+    $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . "/.././");
+    $dotenv->load();
+
+    use App\Helpers\Crud;
+
     // This is your Stripe CLI webhook secret for testing your endpoint locally.
-    $endpoint_secret = 'whsec_d132c5d9f32becbf5ec2ab39ae29257b8affafef9df4b82905e493360d79c4b0';
+    $endpoint_secret = $_ENV["ENDPOINT_SECRET_STRIPE"];
 
     $payload = @file_get_contents('php://input');
     $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -26,7 +31,22 @@
     switch ($event->type) {
         case 'payment_intent.succeeded':
             $paymentIntent = $event->data->object;
-            print_r($paymentIntent);
+
+            $id_cliente = $paymentIntent->metadata->user_id;
+            $id_pedido = $paymentIntent->metadata->order_id;
+
+            $crud = new Crud;
+
+            $crud->update([
+                "table" => "pedidos",
+                "fields" => "status_pedido = 'a caminho'",
+                "where" => "fk_id_cliente = :id_cliente and id_pedido = :id_pedido",
+                "values" => [
+                    [":id_cliente", $id_cliente],
+                    [":id_pedido", $id_pedido]
+                ]
+            ]);
+        break;
         default:
             echo 'Received unknown event type ' . $event->type;
     }

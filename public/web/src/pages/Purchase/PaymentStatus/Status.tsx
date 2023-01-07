@@ -43,7 +43,6 @@ const Status = ({idPedido}: Props) => {
             .then(({ paymentIntent }) => {
                 switch (paymentIntent!.status) {
                     case "succeeded":
-                        // handleQuery("PATCH", `purchase/paymentSucceeded/${id_pedido}`, {}, "protected");
                         setIcon(<FaCheckSquare />);
                         setTitle("Pagamento aprovado");
                         setMessage("Seu pagamento foi aprovado e seu pedido já está a caminho!. Sendo redirecionado, aguarde...");

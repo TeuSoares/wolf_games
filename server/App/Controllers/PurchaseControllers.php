@@ -120,18 +120,5 @@
 
             return $response->withJson($return);
         }
-
-        public function paymentSucceeded(Request $request, Response $response){
-            $token = $request->getAttribute("token");
-            $id_pedido = $request->getAttribute("id_pedido");
-
-            $id_cliente = $token['id'];
-
-            $model = $this->model;
-
-            $return = $model->paymentSucceeded($id_cliente, $id_pedido);
-
-            return $response->withJson($return);
-        }
     }
 ?>
