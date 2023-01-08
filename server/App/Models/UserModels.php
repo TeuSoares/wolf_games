@@ -136,5 +136,57 @@
 
             return $response;
         }
+
+        public function getRequests($id_cliente){
+            $crud = $this->crud;
+
+            $data = $crud->select([
+                "table" => "pedidos",
+                "fields" => "id_pedido, DATE_FORMAT(STR_TO_DATE(data_pedido, '%Y-%m-%d'), '%d/%m/%Y') as data, quantidade, valor_pedido, status_pedido",
+                "where" => "fk_id_cliente = :fk_id_cliente",
+                "values" => [
+                    [":fk_id_cliente", $id_cliente],
+                ]
+            ]);
+
+            if($data){
+                return $data;
+            }else{
+                return Messages::setMessage("error", "Você ainda não realizou nenhum pedido!");
+            }
+        }
+
+        public function getRequestsById($id_cliente, $id_pedido){
+            $crud = $this->crud;
+
+            $infoRequest = $crud->select([
+                "table" => "pedidos",
+                "fields" => "id_pedido, valor_pedido, data_pedido, servico, valor_frete, status_pedido, nome, cpf, email, rua, numero, cidade, bairro, cep",
+                "join" => "INNER JOIN clientes ON pedidos.fk_id_cliente = id_cliente INNER JOIN endereco_entrega ON endereco_entrega.fk_id_pedido = id_pedido",
+                "where" => "pedidos.fk_id_cliente = :fk_id_cliente and id_pedido = :fk_id_pedido",
+                "values" => [
+                    [":fk_id_cliente", $id_cliente],
+                    [":fk_id_pedido", $id_pedido]
+                ]
+            ]);
+
+            $productsRequest = $crud->select([
+                "table" => "produtos_pedidos",
+                "fields" => "quantidade, subtotal, imagem, nome, id_produto",
+                "join" => "INNER JOIN produtos ON fk_id_produto = id_produto",
+                "where" => "fk_id_cliente = :fk_id_cliente and fk_id_pedido = :fk_id_pedido",
+                "values" => [
+                    [":fk_id_cliente", $id_cliente],
+                    [":fk_id_pedido", $id_pedido]
+                ]
+            ]);
+
+            $data = [
+                "info" => $infoRequest,
+                "products" => $productsRequest
+            ];
+
+            return $data;
+        }
     }
 ?>

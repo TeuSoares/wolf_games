@@ -17,4 +17,8 @@
 
     $this->put("/profile/update", UserControllers::class . ":profileUpdate")
     ->add(UserMiddlewares::class . ":validationFieldsProfileUpdate");
+
+    $this->get("/profile/requests", UserControllers::class . ":getRequests");
+
+    $this->get("/profile/requests/{id_pedido}", UserControllers::class . ":getRequestsById");
 ?>

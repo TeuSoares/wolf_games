@@ -73,5 +73,34 @@
 
             return $response->withJson($return);
         }
+
+        public function getRequests(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->getRequests($id_cliente);
+
+            if(isset($return["status"]) && $return["status"] === "error"){
+                return $response->withJson($return, 404);
+            }
+
+            return $response->withJson($return);
+        }
+
+        public function getRequestsById(Request $request, Response $response){
+            $token = $request->getAttribute("token");
+            $id_pedido = $request->getAttribute("id_pedido");
+
+            $id_cliente = $token["id"];
+
+            $model = $this->model;
+
+            $return = $model->getRequestsById($id_cliente, $id_pedido);
+
+            return $response->withJson($return);
+        }
     }
 ?>
