@@ -30,6 +30,8 @@ import Address from "./pages/Purchase/Address";
 import Review from "./pages/Purchase/Review";
 import Checkout from "./pages/Purchase/Checkout";
 import PaymentStatus from "./pages/Purchase/PaymentStatus";
+import Requests from "./pages/Profile/Requests";
+import RequestID from "./pages/Profile/Requests/RequestID";
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
                 <Route path="/register" element={<PrivateUserFalse children={<Register />} />} />
                 <Route path="/verifyEmail/:id" element={<PrivateUserFalse children={<ValidateEmail />} />} />
                 <Route path="/profile" element={<PrivateUserTrue children={<Profile />} />} />
+                <Route path="/profile/requests" element={<PrivateUserTrue children={<Requests />} />} />
+                <Route path="/profile/request/:id_pedido" element={<PrivateUserTrue children={<RequestID />} />} />
                 <Route path="/products/:brand" element={<ProductsBrand />} />
                 <Route path="/products/:brand/:id" element={<ProductID />} />
                 <Route path="/products/search" element={<Search />} />

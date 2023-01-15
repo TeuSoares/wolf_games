@@ -1,8 +1,14 @@
+// Utils
+import { Link } from "react-router-dom";
+
 // Hooks
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState, FormEvent, useContext } from "react";
 import useChangeInput from "../../hooks/useChangeInput";
 import useMessage from "../../hooks/useMessage";
 import useQuery from "../../hooks/useQuery";
+
+// Contexts
+import { AuthContext } from "../../contexts/AuthContext";
 
 // Styles
 import { Button, Form } from "../../styles/Utils";
@@ -31,6 +37,8 @@ const Profile = () => {
     const handleQuery = useQuery();
 
     const { msg, handleSetMessage } = useMessage();
+
+    const { handleLogout } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -89,15 +97,25 @@ const Profile = () => {
         <ContainerProfile>
             <ProfileHeader>
                 <h1>Meus dados</h1>
-                {!formUpdate ? (
-                    <Button type="button" onClick={() => setFormUpdate(true)}>
-                        Editar
+                <div>
+                    {!formUpdate ? (
+                        <Button type="button" onClick={() => setFormUpdate(true)}>
+                            Editar
+                        </Button>
+                    ) : (
+                        <Button type="button" background="#ce3434" backgroundHover="#9e3535" onClick={() => setFormUpdate(false)}>
+                            Cancelar
+                        </Button>
+                    )}
+                    <Link to="/profile/requests">
+                        <Button type="button">
+                            Pedidos
+                        </Button>
+                    </Link>
+                    <Button type="button" onClick={handleLogout}>
+                        Sair
                     </Button>
-                ) : (
-                    <Button type="button" background="#ce3434" backgroundHover="#9e3535" onClick={() => setFormUpdate(false)}>
-                        Cancelar
-                    </Button>
-                )}
+                </div>
             </ProfileHeader>
             {msg && msg}
             {msg || values ? <Loading status={false} /> : <Loading status={true} />}

@@ -21,6 +21,10 @@ export const ProfileHeader = styled.div`
     justify-content: space-between;
     margin-bottom: 1.5rem;
 
+    button:nth-child(1){
+        margin-right: 8px;
+    }
+
     h1{
         color: #9466ff;
         align-self: center;
@@ -29,6 +33,22 @@ export const ProfileHeader = styled.div`
     @media (max-width: 498px) {
         h1{
             font-size: 1.5em;
+        }
+    }
+
+    @media (max-width: 450px) {
+        flex-direction: column;
+        align-items: center;
+
+        h1{
+            margin-bottom: 1rem;
+        }
+    }
+
+    @media (max-width: 290px) {
+        button{
+            width: 100%;
+            margin-bottom: 8px;
         }
     }
 

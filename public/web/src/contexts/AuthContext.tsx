@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext({
     isAuthenticated: false,
     handleChangeAuthentication: (status: boolean) => {},
-    logout: () => {}
+    handleLogout: () => {}
 });
 
 export const AuthContextProvider = ({ children }: PropsWithChildren) => {
@@ -33,13 +33,15 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
         }
     }
 
-    const logout = () => {
+    const handleLogout = () => {
         localStorage.setItem("auth", "false");
+        localStorage.removeItem("token");
         setIsAuthenticated(false);
+        navigate("/");
     }
 
     return ( 
-        <AuthContext.Provider value={{isAuthenticated, handleChangeAuthentication, logout}}>
+        <AuthContext.Provider value={{isAuthenticated, handleChangeAuthentication, handleLogout}}>
             {children}
         </AuthContext.Provider>
     );

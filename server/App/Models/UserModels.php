@@ -161,7 +161,7 @@
 
             $infoRequest = $crud->select([
                 "table" => "pedidos",
-                "fields" => "id_pedido, valor_pedido, data_pedido, servico, valor_frete, status_pedido, nome, cpf, email, rua, numero, cidade, bairro, cep",
+                "fields" => "id_pedido, valor_pedido, DATE_FORMAT(STR_TO_DATE(data_pedido, '%Y-%m-%d'), '%d/%m/%Y') as data, servico, valor_frete, status_pedido, nome, cpf, email, rua, numero, cidade, bairro, cep",
                 "join" => "INNER JOIN clientes ON pedidos.fk_id_cliente = id_cliente INNER JOIN endereco_entrega ON endereco_entrega.fk_id_pedido = id_pedido",
                 "where" => "pedidos.fk_id_cliente = :fk_id_cliente and id_pedido = :fk_id_pedido",
                 "values" => [
