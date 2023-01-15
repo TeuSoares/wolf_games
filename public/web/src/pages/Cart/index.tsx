@@ -1,5 +1,5 @@
 // Utils
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaTrashAlt, FaPlus, FaMinus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -18,6 +18,9 @@ import { DataProductsInterface } from "../../interfaces/Products";
 import Loading from "../../components/Layout/Loading";
 import CalculateFrete from "../../components/CalculateFrete";
 
+// Contexts
+import { AddCarContext } from "../../contexts/AddCarContext";
+
 const Cart = () => {
     const [products, setProducts] = useState<Array<DataProductsInterface>>();
     const [total, setTotal] = useState<number>(0);
@@ -30,6 +33,8 @@ const Cart = () => {
     const { msg, handleSetMessage } = useMessage();
 
     const navigate = useNavigate();
+
+    const { handleChangeCar } = useContext(AddCarContext);
 
     useEffect(() => {
         if(productsSession){
@@ -45,15 +50,13 @@ const Cart = () => {
 
         let productsQuery: string = "";
 
-        if(initialValue){
-            if(initialValue.length > 0){
-                for (const product of initialValue) {
-                    const values: any = Object.values(product);
-                    productsQuery += values[0] + ",";
-                }
-        
-                productsQuery = productsQuery.slice(0, -1);
+        if(initialValue.length > 0){
+            for (const product of initialValue) {
+                const values: any = Object.values(product);
+                productsQuery += values[0] + ",";
             }
+    
+            productsQuery = productsQuery.slice(0, -1);
         }else{
             productsQuery = "0";
         }
@@ -115,6 +118,8 @@ const Cart = () => {
         const othersProducts = productsSession!.filter(item => item.idProduct !== id);
 
         setProductsSession(othersProducts);
+
+        handleChangeCar();
 
         setStatusDelete(!statusDelete);
     };

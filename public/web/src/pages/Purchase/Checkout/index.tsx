@@ -28,24 +28,6 @@ const Checkout = () => {
 
     const { msg, handleSetMessage } = useMessage();
 
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const validationSession = () => {
-            if(state){
-                if(!state.redirect){
-                    navigate("/cart");
-                }else if(state.redirect !== "review"){
-                    navigate("/cart");
-                }
-            }else{
-                navigate("/cart");
-            }
-        }
-
-        validationSession();
-    }, []);
-
     useEffect(() => {
         const createPaymentIntent = async () => {
             const { status, data } = await handleQuery("POST", `purchase/checkout`, {amount: state.amount, id_pedido: state.id_pedido}, "protected");

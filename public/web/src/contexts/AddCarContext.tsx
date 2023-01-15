@@ -1,4 +1,4 @@
-import { useState, createContext, PropsWithChildren} from "react"
+import { useState, createContext, PropsWithChildren,useEffect} from "react"
 
 export const AddCarContext = createContext({
     changeAddCar: false,
@@ -11,6 +11,10 @@ export const AddCarProvider = ({ children }: PropsWithChildren) => {
     const handleChangeCar = () => {
         setChangeAddCar(!changeAddCar);
     }
+
+    useEffect(() => {
+        console.log(changeAddCar);
+    }, []);
 
     return ( 
         <AddCarContext.Provider value={{changeAddCar, handleChangeCar}}>

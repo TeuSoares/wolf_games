@@ -38,22 +38,6 @@ const Address = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const validationSession = () => {
-            if(state){
-                if(!state.redirect){
-                    navigate("/cart");
-                }else if(state.redirect !== "cart"){
-                    navigate("/cart");
-                }
-            }else{
-                navigate("/cart");
-            }
-        }
-
-        validationSession();
-    }, []);
-
-    useEffect(() => {
         const calculateFrete = async () => {
             if(dataForm && Object.hasOwn(dataForm, 'cep')){
                 if(dataForm.cep.length == 8){

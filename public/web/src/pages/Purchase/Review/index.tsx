@@ -1,6 +1,6 @@
 // Utils
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 
 // Styles
 import { Button, Container, Title } from "../../../styles/Utils";
@@ -12,6 +12,9 @@ import useMessage from "../../../hooks/useMessage";
 
 // Components
 import Loading from "../../../components/Layout/Loading";
+
+// Contexts
+import { AddCarContext } from "../../../contexts/AddCarContext";
 
 interface IProducts {
     id_produto: string;
@@ -47,27 +50,9 @@ const Review = () => {
 
     const { id_pedido } = useParams();
 
-    const { state } = useLocation();
+    const { handleChangeCar } = useContext(AddCarContext);
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const validationSession = () => {
-            switch(state){
-                case !state.redirect:
-                    navigate("/cart");
-                break;
-                case state.redirect !== "address":
-                    navigate("/cart");
-                break;
-                case state.redirect !== "paymentStatus":
-                    navigate("/cart");
-                break;
-            }
-        }
-
-        validationSession();
-    }, []);
 
     useEffect(() => {
         const getRequestToReview = async () => {
@@ -91,7 +76,8 @@ const Review = () => {
         const { status, data } = await handleQuery("DELETE", `purchase/delete/${id_pedido}`, {}, "protected");
 
         if(status === "success") {
-            navigate("/profile/requests", {state: data});
+            handleChangeCar();
+            navigate("/profile/requests");
         }else if(status === "error"){
             setLoading(false);
             handleSetMessage(data, true);

@@ -37,7 +37,6 @@ export const Table = styled.table`
     width: 1140px;
     margin: 1.4rem auto;
     border-collapse: collapse;
-    /* white-space: nowrap; */
     color: #fff;
 
     th{

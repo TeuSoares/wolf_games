@@ -6,7 +6,7 @@ interface ProductCardInterface {
     img: string;
     name: string;
     category: string;
-    budge: number;
+    budge: string;
     brand: string;
     idProduct: number;
 }
