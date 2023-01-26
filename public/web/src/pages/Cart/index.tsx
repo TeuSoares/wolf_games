@@ -50,7 +50,7 @@ const Cart = () => {
 
         let productsQuery: string = "";
 
-        if(initialValue.length > 0){
+        if(initialValue && initialValue.length > 0){
             for (const product of initialValue) {
                 const values: any = Object.values(product);
                 productsQuery += values[0] + ",";
