@@ -1,6 +1,7 @@
 # Wolf Games - Loja Virtual
 
 Wolf Games é uma loja virtual 100% gamer. A ideia desse projeto era elevar meu nível como programador, por isso, decidi me desafiar aplicando conceitos, tecnologias que não tinha utilizado ainda. Certamente foi o projeto mais complexo que desenvolvi até agora.
+Crie todo o fluxo que o usuário normalmente percorre dentro de um e-commerce, desde a escolha do produto, calculo de frete, cadastro, pagamento e acompanhar o pedido.
 
 ## Telas do projeto
 
@@ -53,20 +54,21 @@ Wolf Games é uma loja virtual 100% gamer. A ideia desse projeto era elevar meu 
 
 ![Pedido selecionado pelo ID](https://i.imgur.com/xCsS6Wn.png)
 
-## O que foi usado
+## O que foi utilizado
 
-* ReactJS
-* TypeScript
+* TypeScript utilizado com React.JS
+* React Hooks
+* Gerenciamento de estados com Context API
 * PHP
-* Slim Framework
+* Arquitetura MVC com Slim Framework
 * Banco de dados (MySql)
-* Autenticação com Token JWT
+* Sistema de autenticação com JWT
 * Styled-Components
-* Arquitetura MVC
-* Controle de versionamento (GitFlow)
-* Gateway de pagamento do Stripe
+* Controle de versionamento
+* Integração com gateway de pagamento do Stripe
+* Criação de APIs REST e consumo dessas APIs com axios no front
 * Insomnia para testar as APIs REST
-* API do correio
+* Integração com API do correio para cálculo de frete
 
 ## Funcionalidades
 * [x] Adicionar produtos ao carrinho
