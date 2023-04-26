@@ -60,7 +60,8 @@ Crie todo o fluxo que o usuário normalmente percorre dentro de um e-commerce, d
 * React Hooks
 * Gerenciamento de estados com Context API
 * PHP
-* Arquitetura MVC com Slim Framework
+* Arquitetura MVC
+* Slim Framework
 * Banco de dados (MySql)
 * Sistema de autenticação com JWT
 * Styled-Components
