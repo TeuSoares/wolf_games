@@ -68,7 +68,6 @@ Crie todo o fluxo que o usuário normalmente percorre dentro de um e-commerce, d
 * Controle de versionamento
 * Integração com gateway de pagamento do Stripe
 * Criação de APIs REST e consumo dessas APIs com axios no front
-* Insomnia para testar as APIs REST
 * Integração com API do correio para cálculo de frete
 
 ## Funcionalidades
