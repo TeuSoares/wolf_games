@@ -1,101 +1,108 @@
-# Wolf Games - Loja Virtual
+# Wolf Games - Online Store
 
-Wolf Games é uma loja virtual 100% gamer. A ideia desse projeto era elevar meu nível como programador, por isso, decidi me desafiar aplicando conceitos, tecnologias que não tinha utilizado ainda. Certamente foi o projeto mais complexo que desenvolvi até agora.
-Crie todo o fluxo que o usuário normalmente percorre dentro de um e-commerce, desde a escolha do produto, calculo de frete, cadastro, pagamento e acompanhar o pedido.
+Wolf Games is a 100% gaming-focused online store. The goal of this project was to improve my programming skills, so I challenged myself by applying concepts and technologies I had not used before. It was certainly the most complex project I had developed up to that point.
 
-## Telas do projeto
+The project implements the complete flow that a user would normally go through in an e-commerce platform, from choosing a product and calculating shipping costs to registration, payment, and order tracking.
+
+## Project Screens
 
 ### 1 - Home
-> Home ao carregar a página
 
-![Home inicial](https://i.imgur.com/NPLsMmz.png)
+> Home page when loading the application
 
-### 2 - Login e Cadastro
-> Tela de login
+![Initial Home](https://i.imgur.com/NPLsMmz.png)
+
+### 2 - Login and Registration
+
+> Login screen
 
 ![Login](https://i.imgur.com/0mBavVR.png)
 
-> Formulário de cadastro de usuário
+> User registration form
 
-![Cadastro de usuários](https://i.imgur.com/Cb7obZT.png)
+![User Registration](https://i.imgur.com/Cb7obZT.png)
 
-### 3 - Produtos
-> Todos os produtos de uma marca
+### 3 - Products
 
-![Produtos da marca](https://i.imgur.com/Je9IeyC.png)
+> All products from a specific brand
 
-> Produto selecionado pelo ID
+![Brand Products](https://i.imgur.com/Je9IeyC.png)
 
-![Produto pelo ID](https://i.imgur.com/wH3F7GL.png)
+> Product selected by ID
 
-### 4 - Fluxo de compra
-> Carrinho de compra
+![Product by ID](https://i.imgur.com/wH3F7GL.png)
 
-![Carrinho de compra](https://i.imgur.com/Qz3CUP1.png)
+### 4 - Purchase Flow
 
-> Revisão do pedido
+> Shopping cart
 
-![Revisão do pedido](https://i.imgur.com/EVmR0T0.png)
+![Shopping Cart](https://i.imgur.com/Qz3CUP1.png)
+
+> Order review
+
+![Order Review](https://i.imgur.com/EVmR0T0.png)
 
 > Checkout
 
 ![Checkout](https://i.imgur.com/8ArlcW7.png)
 
-> Página que mostra o status do pagamento (Aprovado, reprovado ou pendente)
+> Page displaying the payment status (Approved, Declined, or Pending)
 
-![Feedback do pagamento](https://i.imgur.com/R1iA5cU.png)
+![Payment Feedback](https://i.imgur.com/R1iA5cU.png)
 
-### 5 - Pedidos
-> Tela que mostra todos os pedidos do usuário
+### 5 - Orders
 
-![Todos os pedidos](https://i.imgur.com/Tl8zbva.png)
+> Screen displaying all orders from the user
 
-> Pedido do usuário selecionado pelo ID
+![All Orders](https://i.imgur.com/Tl8zbva.png)
 
-![Pedido selecionado pelo ID](https://i.imgur.com/xCsS6Wn.png)
+> User order selected by ID
 
-## O que foi utilizado
+![Order Selected by ID](https://i.imgur.com/xCsS6Wn.png)
 
-* TypeScript utilizado com React.JS
+## Technologies Used
+
+* TypeScript with React.js
 * React Hooks
-* Gerenciamento de estados com Context API
+* State management with Context API
 * PHP
-* Arquitetura MVC
+* MVC Architecture
 * Slim Framework
-* Banco de dados (MySql)
-* Sistema de autenticação com JWT
+* MySQL database
+* JWT authentication
 * Styled-Components
-* Controle de versionamento
-* Integração com gateway de pagamento do Stripe
-* Criação de APIs REST e consumo dessas APIs com axios no front
-* Integração com API do correio para cálculo de frete
+* Version control
+* Integration with the Stripe payment gateway
+* REST API development and API consumption with Axios on the front-end
+* Integration with the Correios API for shipping cost calculation
 
-## Funcionalidades
-* [x] Adicionar produtos ao carrinho
-* [x] Cadastrar endereço de entrega
-* [x] Finalizar a compra, utilizando o Stripe
-* [x] Cancelar a compra pendente
-* [x] Realizar filtros de produtos
-* [x] Fazer pesquisa por produtos
-* [x] Visualizar mais informações de um produto
-* [x] Ver todos os produtos de uma marca específica
-* [x] Autenticação e cadastro de usuário
-* [x] Editar dados de usuários
-* [x] Visualizar todos os pedidos
-* [x] Verificar se um e-mail é válido, enviando um código de verificação
+## Features
+
+* [x] Add products to the shopping cart
+* [x] Add a shipping address
+* [x] Complete a purchase using Stripe
+* [x] Cancel a pending purchase
+* [x] Filter products
+* [x] Search for products
+* [x] View detailed product information
+* [x] View all products from a specific brand
+* [x] User authentication and registration
+* [x] Edit user information
+* [x] View all orders
+* [x] Verify email addresses by sending a verification code
 
 ## Links
 
-* Apresentação no YouTube: https://www.youtube.com/watch?v=XLFm07fELYM
+* YouTube Presentation: https://www.youtube.com/watch?v=XLFm07fELYM
 
-## Autor
+## Author
 
-* **Mateus Soares** [Linkedin](https://www.linkedin.com/in/mateus-soares-santos/)
+* **Mateus Soares** [LinkedIn](https://www.linkedin.com/in/mateus-soares-santos/)
 
-## Versão
+## Version
 
 1.0.0
 
-## Licença
+## License
 
-Este projeto está licenciado sob a Licença MIT.
+This project is licensed under the MIT License.
